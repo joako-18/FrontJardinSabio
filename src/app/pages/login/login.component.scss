@@ -1,0 +1,88 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    width: 800px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left {
+    background-color: white;
+    padding: 40px;
+    width: 50%;
+    text-align: center;
+}
+
+.left h1 {
+    color: #666;
+}
+
+.left .logo img {
+    width: 60%; // Tamaño relativo al contenedor
+    height: auto;
+}
+
+
+.left h2 {
+    color: #8BC34A;
+}
+
+.left p {
+    color: #666;
+}
+
+.right {
+    background-color: #f5f5dc;
+    padding: 40px;
+    width: 50%;
+}
+
+.right h2 {
+    color: #8BC34A;
+    text-align: center;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login label {
+    align-self: flex-start;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.login input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #8BC34A;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login button[type="button"] {
+    background-color: #8BC34A;
+}
