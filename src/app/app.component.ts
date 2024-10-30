@@ -5,6 +5,7 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { CardComponent } from './components/card/card.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
+import { ComunidadComponent } from './pages/comunidad/comunidad.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
     FooterComponent,
     CardComponent,
     TiendaComponent,
-    CarritoComponent
+    CarritoComponent,
+    ComunidadComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

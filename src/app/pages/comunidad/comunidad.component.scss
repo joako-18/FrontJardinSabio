@@ -1,0 +1,87 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+.title h2 {
+  color: #457A31;
+  font-size: 8vh;
+}
+
+.card {
+  background-color: #F2EBC9;
+  width: 90%;
+  margin: 70px;
+  border-radius: 10px;
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  border-bottom: 3px solid #280404;
+}
+
+.cabeza h2 {
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.botones {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nuevo {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nuevo input {
+  border-radius: 10px;
+  width: 300px;
+  height: 30px;
+}
+
+.principal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.eliminar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 600px;
+}
+
+.publicacion {
+  margin: 20px;
+  border: 3px solid #280404;
+  border-radius: 10px;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenido h3 {
+  font-size: 16px;
+}
+
+.contenido img {
+  border-radius: 10px;
+}
