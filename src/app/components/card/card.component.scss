@@ -1,0 +1,26 @@
+h2 {
+  color: #280404;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #d7d7d7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 300px;
+  height: 400px;
+}
+
+
+.card img {
+  border-radius: 10px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
