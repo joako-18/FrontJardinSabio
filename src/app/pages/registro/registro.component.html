@@ -1,1 +1,31 @@
-<p>registro works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="container">
+        <h2>REGISTRO</h2>
+        <form class="register">
+            <label for="name">NAME:</label>
+            <input type="text" id="name" name="name">
+            <label for="email">EMAIL:</label>
+            <input type="email" id="email" name="email">
+            <label for="password">PASSWORD:</label>
+            <input type="password" id="password" name="password">
+            <label for="confirm-password">CONFIRM PASSWORD:</label>
+            <input type="password" id="confirm-password" name="confirm-password">
+            <label for="user-type">TYPE USER:</label>
+            <div class="user-type">
+                <input type="radio" id="aficionado" name="user-type" value="aficionado">
+                <label for="aficionado">AFICIONADO</label>
+                <input type="radio" id="comerciante" name="user-type" value="comerciante">
+                <label for="comerciante">COMERCIANTE</label>
+            </div>
+            <button type="submit">REGISTRARSE</button>
+        </form>
+    </div>
+</body>
+</html>
