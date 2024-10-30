@@ -1,0 +1,26 @@
+h2 {
+  color: #280404;
+  font-size: 2rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  width: 30px;
+}
+
+img {
+  border-radius: 10px;
+}

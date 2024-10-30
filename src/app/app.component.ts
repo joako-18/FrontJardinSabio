@@ -4,10 +4,14 @@ import { HeaderComponent } from "./components/header/header.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { CardComponent } from './components/card/card.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
+<<<<<<< HEAD
 import { LoginComponent } from "./pages/login/login.component";
 import { LoginviveroComponent } from "./pages/loginvivero/loginvivero.component";
 import { RegistroComponent } from "./pages/registro/registro.component";
 import { HomeComponent } from "./pages/home/home.component";
+=======
+import { CarritoComponent } from './pages/carrito/carrito.component';
+>>>>>>> 3a8625730c52e540030d1be171f64bf9fdcd7dee
 
 @Component({
   selector: 'app-root',
@@ -18,11 +22,16 @@ import { HomeComponent } from "./pages/home/home.component";
     FooterComponent,
     CardComponent,
     TiendaComponent,
+<<<<<<< HEAD
     LoginComponent,
     LoginviveroComponent,
     RegistroComponent,
     HomeComponent
 ],
+=======
+    CarritoComponent
+  ],
+>>>>>>> 3a8625730c52e540030d1be171f64bf9fdcd7dee
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
