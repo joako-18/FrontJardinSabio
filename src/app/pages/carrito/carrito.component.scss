@@ -1,0 +1,68 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.title h2 {
+  color: #457A31;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 8vh;
+}
+
+.card {
+  background-color: #F2EBC9;
+  border-radius: 10px;
+  width: 90%;
+  margin: 70px;
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 500px;
+}
+
+.encabezado h2 {
+  color: #457A31;
+  font-size: 40px;
+}
+
+.botones {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-tarjeta {
+  background-color: #457A31;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ubicacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #457A31;
+  border-radius: 5px;
+}
+
+.btn-compra {
+  background-color: #457A31;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-compra h2 {
+  color: white;
+  font-size: 20px;
+}
