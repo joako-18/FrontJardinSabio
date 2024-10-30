@@ -9,6 +9,12 @@
     flex: 1; // Esto permite que el div izquierdo ocupe el espacio restante
 }
 
+.left h1 {
+  color: #165100;
+  font-size: 10vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .right {
     margin-left: auto; // Esto empuja el div derecho hacia la derecha
 }
