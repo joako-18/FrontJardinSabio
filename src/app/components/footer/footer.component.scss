@@ -1,0 +1,37 @@
+footer {
+  background-color: #165100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 300px;
+  top: 100%;
+}
+
+h2 {
+  color: white;
+  font-size: 20px;
+}
+
+li {
+  color: white;
+}
+
+.section1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 3px solid white;
+}
+
+.section2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.section3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
