@@ -11,7 +11,11 @@ import { RegistroComponent } from "./pages/registro/registro.component";
 import { HomeComponent } from "./pages/home/home.component";
 =======
 import { CarritoComponent } from './pages/carrito/carrito.component';
+<<<<<<< HEAD
+import { ComunidadComponent } from './pages/comunidad/comunidad.component';
+=======
 >>>>>>> 3a8625730c52e540030d1be171f64bf9fdcd7dee
+>>>>>>> 7b1d538032a9da42e17d335a4a6c41ee4bfaf8dc
 
 @Component({
   selector: 'app-root',
@@ -23,6 +27,10 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
     CardComponent,
     TiendaComponent,
 <<<<<<< HEAD
+    CarritoComponent,
+    ComunidadComponent
+=======
+<<<<<<< HEAD
     LoginComponent,
     LoginviveroComponent,
     RegistroComponent,
@@ -30,6 +38,7 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 ],
 =======
     CarritoComponent
+>>>>>>> 7b1d538032a9da42e17d335a4a6c41ee4bfaf8dc
   ],
 >>>>>>> 3a8625730c52e540030d1be171f64bf9fdcd7dee
   templateUrl: './app.component.html',
