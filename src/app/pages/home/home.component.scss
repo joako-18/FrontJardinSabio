@@ -1,12 +1,12 @@
 .container {
     display: flex;
-    justify-content: space-between; // Esto distribuye los elementos a los extremos del contenedor
-    align-items: center; // Esto alinea verticalmente los elementos al centro
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
 }
 
 .left {
-    flex: 1; // Esto permite que el div izquierdo ocupe el espacio restante
+    flex: 1;
 }
 
 .left h1 {
@@ -16,12 +16,12 @@
 }
 
 .right {
-    margin-left: auto; // Esto empuja el div derecho hacia la derecha
+    margin-left: auto;
 }
 
 .imagen img {
-    max-width: 100%; // Asegura que la imagen no exceda el tamaño del contenedor
-    height: auto; // Mantiene las proporciones de la imagen
-    object-fit: cover; // Asegura que la imagen se recorte y ajuste bien dentro del círculo
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
