@@ -2,7 +2,10 @@
   <h2>TIENDA VERDE</h2>
 
   <div>
-    <input type="search">
+    <mat-form-field appearance="outline">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Buscar">
+    </mat-form-field>
   </div>
 
   <div class="filter">
@@ -10,11 +13,13 @@
   </div>
 </div>
 
-<div class="cards">
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
-  <app-card></app-card>
+<div class="center">
+  <div class="cards">
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+    <app-card></app-card>
+  </div>
 </div>

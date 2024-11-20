@@ -8,17 +8,23 @@ import { RegistroComponent } from './pages/registro/registro.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'carrito', component: CarritoComponent},
-  {path: 'comunidad', component: ComunidadComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'loginVivero', component: LoginviveroComponent},
-  {path: 'registro', component: RegistroComponent},
-  {path: 'tienda', component: TiendaComponent},
-  {path: '**', redirectTo:'/home'}
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'carrito',
+    component: CarritoComponent,
+    canActivate: [AuthGuard] // Protege esta ruta con el guard
+  },
+  { path: 'comunidad', component: ComunidadComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'loginVivero', component: LoginviveroComponent },
+  { path: 'registro', component: RegistroComponent },
+  { path: 'tienda', component: TiendaComponent },
+  { path: '**', redirectTo: '/home' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
