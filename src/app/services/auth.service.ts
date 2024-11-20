@@ -7,7 +7,7 @@ import {jwtDecode} from 'jwt-decode'
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/login'; // URL del endpoint de autenticación
+  private apiUrl = 'http://localhost:8000/login';
   private tokenKey = 'authToken';
 
   constructor(private http: HttpClient) {}
