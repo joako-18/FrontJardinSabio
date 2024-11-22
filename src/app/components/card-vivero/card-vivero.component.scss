@@ -1,0 +1,48 @@
+.card {
+  display: flex;
+  justify-content: space-around;
+  background-color: #F2EBC9;
+  width: 80%;
+  margin: 20px;
+  border-radius: 12px;
+}
+
+.card img {
+  border-radius: 12px;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.contenido h3 {
+  color: #457A31;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.contenido p {
+  color: #280404;
+  text-align: justify;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  color: #457A31;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+}
+
+.imagen {
+  margin: 20px;
+}

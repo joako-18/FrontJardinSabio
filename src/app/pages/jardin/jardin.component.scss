@@ -1,0 +1,40 @@
+.title h1{
+  color: #457A31;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+}
+
+.cabecera {
+  width: 100%;
+  height: 30px;
+  background-color: #457A31;
+}
+
+input {
+  background-color: #457A31;
+  border-color: white;
+  color: white;
+  width: 300px;
+  height: 50px;
+  font-size: 14px;
+  margin: 0;
+}
+
+.fondo {
+  background-color: #F2EBC9;
+  margin: 50px;
+}
+
+.tabla {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+
+li {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #280404;
+}

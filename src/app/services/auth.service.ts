@@ -3,21 +3,31 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {jwtDecode} from 'jwt-decode'
 
+interface LoginResponse {
+  access_token: string;
+  token_type: string;
+  name: string;
+  email: string;
+  ubication: string;
+  role: string;
+  id_user: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8000/login';
+  private apiUrl = 'https://glv39q1x-8000.use2.devtunnels.ms/';
   private tokenKey = 'authToken';
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
-    return this.http.post(this.apiUrl, { email, password });
+  login(email: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}login`, { email, password });
   }
 
   saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token); // Cambia a sessionStorage si es necesario
+    localStorage.setItem(this.tokenKey, token);
   }
 
   getToken(): string | null {

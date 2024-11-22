@@ -17,7 +17,7 @@ export class HeaderComponent {
   }
 
   onPlantas() {
-    this.router.navigate(['plantas']);
+    this.router.navigate(['jardin']);
   }
 
   onComunidad() {

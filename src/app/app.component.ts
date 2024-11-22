@@ -5,7 +5,6 @@ import { FooterComponent } from "./components/footer/footer.component";
 import { CardComponent } from './components/card/card.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
 import { LoginComponent } from "./pages/login/login.component";
-import { LoginviveroComponent } from "./pages/loginvivero/loginvivero.component";
 import { RegistroComponent } from "./pages/registro/registro.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { CarritoComponent } from './pages/carrito/carrito.component';
@@ -23,7 +22,6 @@ import { ComunidadComponent } from './pages/comunidad/comunidad.component';
     CarritoComponent,
     ComunidadComponent,
     LoginComponent,
-    LoginviveroComponent,
     RegistroComponent,
     HomeComponent,
     CarritoComponent

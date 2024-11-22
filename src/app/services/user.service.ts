@@ -15,7 +15,7 @@ interface UserRegistration {
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://localhost:8000/signUp'; // Cambia esto según tu API
+  private apiUrl = 'https://glv39q1x-8000.use2.devtunnels.ms/';
 
   constructor(private http: HttpClient) {}
 

@@ -1,0 +1,29 @@
+.title {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.title h2 {
+  color: #165100;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.title input {
+  background-color: #165100;
+  border-color: white;
+  color: white;
+  width: 300px;
+  height: 50px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.mapa {
+  display: flex;
+  justify-content: center;
+}
+
+.mapa img {
+  border-radius: 12px;
+}
