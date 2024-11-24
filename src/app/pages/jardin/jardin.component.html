@@ -1,31 +1,27 @@
 <div class="body">
-    <div class="title">
-      <h1>MI JARDIN</h1>
+  <div class="title">
+    <h1>MI JARDÍN</h1>
+  </div>
+</div>
+<div class="fondo">
+  <div>
+    <div class="cabecera"></div>
+    <div class="tabla">
+      <div>
+        <input type="search" placeholder="Buscador ....">
+        <ul>
+          <li
+            *ngFor="let plant of plants"
+            (click)="selectPlant(plant.id)"
+            [class.selected]="plant.id === selectedPlant?.id"> <!-- Resalta la planta seleccionada -->
+            {{ plant.name }}
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- Muestra la tarjeta con la planta seleccionada -->
+        <app-card-planta [plant]="selectedPlant"></app-card-planta>
+      </div>
     </div>
   </div>
-  <div class="fondo">
-    <div>
-      <div class="cabecera"></div>
-      <div class="tabla">
-        <div>
-          <input type="search" placeholder="buscador ....">
-          <ul>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-            <li>GERBERA</li>
-          </ul>
-        </div>
-        <div>
-            <app-card-planta></app-card-planta>
-        </div>
-      </div>
-
-    </div>
 </div>

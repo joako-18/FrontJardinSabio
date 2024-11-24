@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-</head>
-<body>
+<div class="body">
   <div class="container">
     <div class="left">
       <h1>BIENVENIDO A...</h1>
       <div class="logo">
-        <img src="logoJS.png" alt="Logo">
+        <img src="logoJS.png" alt="Logo" />
       </div>
       <h2>JARDÍN SABIO</h2>
       <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.</p>
@@ -27,7 +20,9 @@
             required
           />
           <div *ngIf="email?.invalid && email?.touched" class="error">
-            El email es requerido y debe ser válido.
+            <!-- Validaciones específicas -->
+            <span *ngIf="email?.errors?.['required']">El email es obligatorio.</span>
+            <span *ngIf="email?.errors?.['email']">Debes ingresar un email válido.</span>
           </div>
 
           <label for="password">PASSWORD:</label>
@@ -38,7 +33,11 @@
             required
           />
           <div *ngIf="password?.invalid && password?.touched" class="error">
-            La contraseña es requerida.
+            <!-- Validaciones específicas -->
+            <span *ngIf="password?.errors?.['required']">La contraseña es obligatoria.</span>
+            <span *ngIf="password?.errors?.['minlength']">
+              La contraseña debe tener al menos 6 caracteres.
+            </span>
           </div>
 
           <button type="submit" [disabled]="loginForm.invalid">SIGN IN</button>
@@ -51,6 +50,4 @@
       </form>
     </div>
   </div>
-</body>
-</html>
-
+</div>

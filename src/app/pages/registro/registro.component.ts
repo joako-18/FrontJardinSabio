@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegistroComponent {
   registerForm: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(
     private router: Router,
@@ -33,22 +34,14 @@ export class RegistroComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
-      const formData = this.registerForm.value;
-      if (formData.password !== formData.confirmPassword) {
+      const formData = this.createFormData();
+
+      if (!formData) {
         alert('Las contraseñas no coinciden.');
         return;
       }
 
-      const user = {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        ubication: { location: formData.ubication }, // Modifica según tu formato
-        role: formData.userType,
-        img: formData.img,
-      };
-
-      this.userService.registerUser(user).subscribe(
+      this.userService.signUp(formData).subscribe(
         (response) => {
           alert('Usuario registrado con éxito.');
           this.router.navigate(['login']);
@@ -64,6 +57,28 @@ export class RegistroComponent {
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    this.registerForm.patchValue({ img: file });
+    this.selectedFile = file;
+  }
+
+  private createFormData(): FormData | null {
+    const formData = new FormData();
+
+    const values = this.registerForm.value;
+
+    if (values.password !== values.confirmPassword) {
+      return null; // Las contraseñas no coinciden
+    }
+
+    formData.append('name', values.name);
+    formData.append('email', values.email);
+    formData.append('password', values.password);
+    formData.append('ubication', JSON.stringify({ location: values.ubication }));
+    formData.append('role', values.userType);
+
+    if (this.selectedFile) {
+      formData.append('img', this.selectedFile);
+    }
+
+    return formData;
   }
 }

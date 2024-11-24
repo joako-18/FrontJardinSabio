@@ -6,7 +6,18 @@
 <div class="mapa">
   <img src="fakeMapa.jpg" alt="mapa">
 </div>
- <div class="lista">
-  <app-card-vivero></app-card-vivero>
-  <app-card-vivero></app-card-vivero>
- </div>
+
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p> <!-- Mostrar mensaje de error -->
+</div>
+
+<div class="lista" *ngIf="viveros.length > 0; else noViveros">
+  <app-card-vivero *ngFor="let vivero of viveros" [vivero]="vivero"></app-card-vivero>
+</div>
+
+<ng-template #noViveros>
+  <div class="no-viveros">
+    <p>No se encontraron viveros cerca de ti.</p>
+  </div>
+</ng-template>
+

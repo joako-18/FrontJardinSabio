@@ -1,20 +1,13 @@
-<div class="body">
-  <div class="card">
-    <div class="imagen">
-      <img src="fakeVivero.jpg" alt="vivero">
-    </div>
-    <div class="contenido">
-      <h3>Plantas Oriente</h3>
+<div class="card">
+  <div class="imagen">
+    <img [src]="vivero.image || 'fakeVivero.jpg'" alt="vivero">
+  </div>
+  <div class="contenido">
+    <h3>{{ vivero.name || 'Nombre del vivero' }}</h3>
     <div class="link">
       <img src="marcador.png" alt="marcador-icon">
-      <a href="">Av. los humedales norte ...</a>
+      <a [href]="vivero.location || '#'">{{ vivero.location || 'Dirección no disponible' }}</a>
     </div>
-    <p>Lorem Ipsum es simplemente el texto de relleno de las imprentas
-      y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar
-      de las industrias desde el año 1500, cuando un impresor (anónimo) usó
-      una galera de tipos y los mezcló de tal manera que logró fabricar un
-      libro de muestras tipográficas.
-    </p>
-    </div>
+    <p>{{ vivero.description || 'Descripción no disponible' }}</p>
   </div>
 </div>
