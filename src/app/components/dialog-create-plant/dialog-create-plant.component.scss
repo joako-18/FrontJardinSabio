@@ -1,0 +1,104 @@
+:host {
+  display: block;
+  background-color: #F2EBC9; /* Fondo del diálogo */
+  color: #457A31; /* Texto principal */
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+mat-dialog-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: #457A31;
+  margin-bottom: 16px;
+}
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+  background: rgba(69, 122, 49, 0.1); /* Fondo suave en los campos */
+  border-radius: 4px;
+}
+
+mat-label {
+  color: #457A31;
+  font-weight: bold;
+}
+
+input[matInput], textarea[matInput] {
+  color: #457A31;
+  border-color: #457A31;
+}
+
+textarea[matInput] {
+  resize: none; /* Evita redimensionar el textarea */
+}
+
+mat-select {
+  color: #457A31;
+}
+
+mat-option {
+  color: #457A31;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+button[mat-button] {
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button[mat-button][mat-dialog-close] {
+  background-color: #F2EBC9;
+  color: #457A31;
+  border: 2px solid #457A31;
+}
+
+button[mat-button][mat-dialog-close]:hover {
+  background-color: #E0D9B2; /* Color más oscuro al pasar el mouse */
+}
+
+button[mat-button]:not([mat-dialog-close]) {
+  background-color: #457A31;
+  color: #F2EBC9;
+}
+
+button[mat-button]:not([mat-dialog-close]):hover {
+  background-color: #366225;
+}
+
+mat-label {
+  color: #457A31; /* Color del texto del label */
+  font-weight: bold; /* Hacer que el texto sea en negrita */
+  font-size: 16px; /* Tamaño del texto */
+  margin-bottom: 4px; /* Espacio entre el label y el campo de entrada */
+  display: block; /* Asegura que el label ocupe toda la línea */
+  text-transform: capitalize; /* Primeras letras en mayúsculas */
+}
+
+mat-label.mat-floating {
+  color: #457A31; /* Color del texto para los labels flotantes */
+  font-size: 14px; /* Tamaño más pequeño para los labels flotantes */
+  font-weight: normal; /* Establecer peso normal en caso de label flotante */
+  top: -8px; /* Ajuste vertical cuando el label flota */
+}
+
+mat-label.mat-required {
+  color: #D32F2F; /* Color rojo para labels con el atributo required */
+  font-weight: bold;
+}

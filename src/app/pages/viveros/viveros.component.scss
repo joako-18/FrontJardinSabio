@@ -22,8 +22,12 @@
 .mapa {
   display: flex;
   justify-content: center;
+  margin: 20px;
+  height: 400px; /* Altura fija para el mapa */
 }
 
-.mapa img {
+#map {
+  width: 90%; /* Ajustar según necesidad */
+  height: 100%; /* Ocupar el espacio disponible */
   border-radius: 12px;
 }

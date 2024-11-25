@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PlantService {
-  private apiUrl = 'http://localhost:8000';
+  private apiUrl = 'https://glv39q1x-8000.use2.devtunnels.ms';
 
   constructor(private http: HttpClient) {}
 

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CardPlantaComponent } from '../../components/card-planta/card-planta.component';
 import { PlantService } from '../../services/plant.service';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreatePlantComponent } from '../../components/dialog-create-plant/dialog-create-plant.component';
 
 @Component({
   selector: 'app-jardin',
@@ -15,7 +17,7 @@ export class JardinComponent {
   userId: number = 1; // ID del usuario (cámbialo según tu lógica)
   selectedPlant: any | null = null;
 
-  constructor(private plantService: PlantService) {}
+  constructor(private plantService: PlantService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadUserPlants();
@@ -42,4 +44,33 @@ export class JardinComponent {
       }
     );
   }
+
+openCreatePlantDialog(): void {
+  const dialogRef = this.dialog.open(DialogCreatePlantComponent, {
+    width: '400px'
+  });
+
+  dialogRef.afterClosed().subscribe((result) => {
+    if (result) {
+      const formData = new FormData();
+      formData.append('name', result.name);
+      formData.append('description', result.description);
+      formData.append('hora_de_riego', result.hora_de_riego);
+      formData.append('category', result.category);
+      formData.append('tipo', result.tipo);
+      if (result.img) {
+        formData.append('img', result.img);
+      }
+
+      this.plantService.createPlant(this.userId, formData).subscribe(
+        (response) => {
+          this.loadUserPlants(); // Recargar las plantas después de crear una nueva
+        },
+        (error) => {
+          console.error('Error al crear la planta:', error);
+        }
+      );
+    }
+  });
+}
 }

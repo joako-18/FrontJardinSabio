@@ -27,21 +27,34 @@ export class RegistroComponent {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       userType: ['', Validators.required],
-      ubication: ['', Validators.required],
-      img: [null],
+      ubication: [''], // Opcional
     });
   }
 
+  /**
+   * Método que se ejecuta al registrar
+   */
   onRegister() {
     if (this.registerForm.valid) {
-      const formData = this.createFormData();
+      const values = this.registerForm.value;
 
-      if (!formData) {
+      // Verificar contraseñas
+      if (values.password !== values.confirmPassword) {
         alert('Las contraseñas no coinciden.');
         return;
       }
 
-      this.userService.signUp(formData).subscribe(
+      const name = values.name;
+      const email = values.email;
+      const password = values.password;
+      const ubication = values.ubication
+        ? JSON.stringify({ location: values.ubication })
+        : null;
+      const role = values.userType;
+      const file = this.selectedFile;
+
+      // Llamar al servicio para registro
+      this.userService.signUp(name, email, password, ubication, role, file).subscribe(
         (response) => {
           alert('Usuario registrado con éxito.');
           this.router.navigate(['login']);
@@ -55,30 +68,14 @@ export class RegistroComponent {
     }
   }
 
+  /**
+   * Método para manejar selección de archivo
+   * @param event Evento del input de archivo
+   */
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    this.selectedFile = file;
-  }
-
-  private createFormData(): FormData | null {
-    const formData = new FormData();
-
-    const values = this.registerForm.value;
-
-    if (values.password !== values.confirmPassword) {
-      return null; // Las contraseñas no coinciden
+    if (file) {
+      this.selectedFile = file;
     }
-
-    formData.append('name', values.name);
-    formData.append('email', values.email);
-    formData.append('password', values.password);
-    formData.append('ubication', JSON.stringify({ location: values.ubication }));
-    formData.append('role', values.userType);
-
-    if (this.selectedFile) {
-      formData.append('img', this.selectedFile);
-    }
-
-    return formData;
   }
 }
