@@ -28,7 +28,7 @@ export class ComunidadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadPublications(); // Cargar publicaciones al iniciar
+    this.loadPublications();
   }
 
   // Cargar publicaciones desde la API
@@ -39,13 +39,19 @@ export class ComunidadComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error al cargar publicaciones:', err);
-        this.publications = []; // Manejar el error asignando un valor por defecto
+        this.publications = [];
       },
     });
   }
 
   // Crear una nueva publicación
-  onCreatePublication(id_user: number): void {
+  onCreatePublication(): void {
+    const userId = this.getUserIdFromToken();
+    if (!userId) {
+      alert('Error de autenticación. Por favor, inicia sesión nuevamente.');
+      return;
+    }
+
     if (this.publicationForm.invalid) {
       alert('Por favor, completa el formulario correctamente.');
       return;
@@ -56,11 +62,11 @@ export class ComunidadComponent implements OnInit {
     formData.append('content', this.publicationForm.value.content);
     formData.append('file', this.publicationForm.value.file);
 
-    this.publicationService.createPublication(id_user, formData).subscribe(
+    this.publicationService.createPublication(userId, formData).subscribe(
       (response) => {
         alert('Publicación creada con éxito.');
-        this.publicationForm.reset(); // Reiniciar el formulario
-        this.loadPublications(); // Recargar publicaciones
+        this.publicationForm.reset();
+        this.loadPublications();
       },
       (error) => {
         console.error('Error al crear publicación:', error);
@@ -70,12 +76,18 @@ export class ComunidadComponent implements OnInit {
   }
 
   // Eliminar publicación
-  onDeletePublication(id_user: number, id_publication: number): void {
+  onDeletePublication(id_publication: number): void {
+    const userId = this.getUserIdFromToken();
+    if (!userId) {
+      alert('Error de autenticación. Por favor, inicia sesión nuevamente.');
+      return;
+    }
+
     if (confirm('¿Estás seguro de que quieres eliminar esta publicación?')) {
-      this.publicationService.deletePublication(id_user, id_publication).subscribe(
+      this.publicationService.deletePublication(userId, id_publication).subscribe(
         () => {
           alert('Publicación eliminada.');
-          this.loadPublications(); // Recargar publicaciones
+          this.loadPublications();
         },
         (error) => {
           console.error('Error al eliminar publicación:', error);
@@ -92,5 +104,20 @@ export class ComunidadComponent implements OnInit {
       this.publicationForm.patchValue({ file });
     }
   }
-}
 
+  // Obtener ID del usuario desde el token
+  private getUserIdFromToken(): number | null {
+    const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del token JWT
+      return payload.id; // Cambia esto según cómo esté estructurado el token
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
+  }
+}

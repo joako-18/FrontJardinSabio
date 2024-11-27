@@ -12,7 +12,7 @@ export class PublicationService {
 
   // Obtener publicaciones
   getPublications(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/users/publications`);
+    return this.http.get<any[]>(`${this.apiUrl}/publications`);
   }
 
   // Crear publicación

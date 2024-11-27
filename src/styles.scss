@@ -1,8 +1,89 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales para el proyecto Angular */
 
-html, body { height: 100%; }
-body {
+/* Aplica el fondo animado al body */
+html, body {
+  height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  cursor: url("/amar.png"), auto;
+
+  /* Fondo animado */
+  --y-0: 50%;
+  --c-0: hsla(49.756097560975604, 61%, 86%, 1);
+  --x-0: 15%;
+  --s-start-0: 5.020080321285141%;
+  --s-end-0: 92.83310625926558%;
+  background-color: hsla(88, 0%, 100%, 1);
+  background-image: radial-gradient(
+    circle at var(--x-0) var(--y-0),
+    var(--c-0) var(--s-start-0),
+    transparent var(--s-end-0)
+  );
+  animation: hero-gradient-animation 10s linear infinite alternate;
+  background-blend-mode: multiply;
+}
+
+/* Keyframes para la animación del gradiente */
+@keyframes hero-gradient-animation {
+  0% {
+      --y-0: 50%;
+      --s-start-0: 5.020080321285141%;
+      --s-end-0: 92.83310625926558%;
+      --c-0: hsla(49.756097560975604, 61%, 86%, 1);
+      --x-0: 15%;
+  }
+
+  33% {
+      --y-0: 77%;
+      --s-start-0: 5.020080321285141%;
+      --s-end-0: 98.74982504480812%;
+      --c-0: hsla(105.88235294117655, 0%, 100%, 1);
+      --x-0: 49%;
+  }
+
+  66% {
+      --y-0: 52%;
+      --s-start-0: 5.020080321285141%;
+      --s-end-0: 76.58276391699611%;
+      --c-0: hsla(88.65168539326042, 0%, 96%, 1);
+      --x-0: 84%;
+  }
+
+  99% {
+      --y-0: 50%;
+      --s-start-0: 5.020080321285141%;
+      --s-end-0: 92.58895711630703%;
+      --c-0: hsla(49.756097560975604, 61%, 86%, 1);
+      --x-0: 15%;
+  }
+}
+
+/* Registro de propiedades CSS personalizadas */
+@property --y-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --s-start-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 5.020080321285141%;
+}
+
+@property --s-end-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 92.83310625926558%;
+}
+
+@property --c-0 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: hsla(49.756097560975604, 61%, 86%, 1);
+}
+
+@property --x-0 {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 15%;
 }

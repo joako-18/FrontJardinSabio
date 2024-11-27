@@ -1,0 +1,27 @@
+<h2>Crear nuevo Vivero</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name" placeholder="Nombre del vivero" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="description" placeholder="Descripción"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ubicación</mat-label>
+    <input matInput formControlName="ubication" placeholder="Ubicación" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Imagen</mat-label>
+    <input type="file" (change)="onFileChange($event)" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button (click)="submitForm()">Guardar</button>
+</mat-dialog-actions>

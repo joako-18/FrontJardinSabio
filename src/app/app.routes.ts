@@ -9,17 +9,20 @@ import { TiendaComponent } from './pages/tienda/tienda.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { JardinComponent } from './pages/jardin/jardin.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'carrito', component: CarritoComponent},
-  { path: 'comunidad', component: ComunidadComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard] },
+  { path: 'comunidad', component: ComunidadComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'viveros', component: ViverosComponent },
+  { path: 'viveros', component: ViverosComponent, canActivate: [AuthGuard] },
   { path: 'registro', component: RegistroComponent },
-  { path: 'tienda', component: TiendaComponent },
-  { path: 'jardin', component: JardinComponent},
-  { path: '**', redirectTo: '/home' }
+  { path: 'tienda', component: TiendaComponent, canActivate: [AuthGuard] },
+  { path: 'jardin', component: JardinComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '/home' },
 ];
 
 

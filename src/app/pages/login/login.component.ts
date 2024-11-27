@@ -38,7 +38,6 @@ export class LoginComponent {
     return this.loginForm.get('password');
   }
 
-  // Método para manejar el submit
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
@@ -47,16 +46,12 @@ export class LoginComponent {
         next: (response: any) => {
           const { token, role } = response;
 
-          // Almacena token y rol en localStorage con expiración
-          this.setItemWithExpiration('token', token, 1); // 1 minuto
-          this.setItemWithExpiration('role', role, 1);  // 1 minuto
+          // Almacena token y rol en localStorage
+          localStorage.setItem('token', token);
+          localStorage.setItem('role', role);
 
-          // Redirige según el rol del usuario
-          if (role === 'usuario') {
-            this.router.navigate(['/home']);
-          } else if (role === 'gestor_vivero') {
-            this.router.navigate(['/loginVivero']);
-          }
+          // Redirige a una ruta predeterminada, el guard hará el resto
+          this.router.navigate(['/home']);
         },
         error: () => {
           this.errorMessage = 'Email o contraseña incorrectos. Inténtalo de nuevo.';
@@ -68,32 +63,5 @@ export class LoginComponent {
   // Navegación al registro
   onRegistro(): void {
     this.router.navigate(['/registro']);
-  }
-
-  // Almacena datos en localStorage con expiración
-  private setItemWithExpiration(key: string, value: string, minutes: number): void {
-    const now = new Date();
-    const expiration = now.getTime() + minutes * 60 * 1000; // Convertir minutos a milisegundos
-    const item = {
-      value: value,
-      expiration: expiration,
-    };
-    localStorage.setItem(key, JSON.stringify(item));
-  }
-
-  // Recupera datos de localStorage verificando la expiración
-  private getItemWithExpiration(key: string): string | null {
-    const item = localStorage.getItem(key);
-    if (!item) return null;
-
-    const parsedItem = JSON.parse(item);
-    const now = new Date();
-
-    if (now.getTime() > parsedItem.expiration) {
-      localStorage.removeItem(key); // Eliminar el ítem expirado
-      return null;
-    }
-
-    return parsedItem.value;
   }
 }

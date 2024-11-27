@@ -1,19 +1,17 @@
-<script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7xINwTKyzJTcP4vshBJqFgO2rqFRQP_Q&callback=initMap"
-  defer>
-</script>
-
 <div class="title">
   <h2>VIVEROS CERCA DE TI ...</h2>
   <input type="search" placeholder="Buscador ..." />
+  <button (click)="openCreateNurseryDialog()">Crear Vivero</button>
 </div>
-
-<!-- Mapa dinámico -->
-<div class="mapa" id="map"></div>
 
 <!-- Mensaje de error -->
 <div *ngIf="errorMessage" class="error-message">
   <p>{{ errorMessage }}</p>
+</div>
+
+<!-- Contenedor del mapa -->
+<div class="mapa">
+  <div id="map" style="width: 100%; height: 400px;"></div>
 </div>
 
 <!-- Lista de viveros -->
@@ -21,7 +19,6 @@
   <app-card-vivero *ngFor="let vivero of viveros" [vivero]="vivero"></app-card-vivero>
 </div>
 
-<!-- Plantilla alternativa si no hay viveros -->
 <ng-template #noViveros>
   <div class="no-viveros">
     <p>No se encontraron viveros cerca de ti.</p>

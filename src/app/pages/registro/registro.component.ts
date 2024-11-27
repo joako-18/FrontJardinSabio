@@ -67,11 +67,6 @@ export class RegistroComponent {
       alert('Por favor, completa el formulario correctamente.');
     }
   }
-
-  /**
-   * Método para manejar selección de archivo
-   * @param event Evento del input de archivo
-   */
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {

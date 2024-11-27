@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NurseryService } from '../../services/nursery.service';
-import { Observable } from 'rxjs';
-import { CardViveroComponent } from '../../components/card-vivero/card-vivero.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreatePlantComponent } from '../../components/dialog-create-plant/dialog-create-plant.component';
 import { CommonModule } from '@angular/common';
-declare const google: any;
+import { CardViveroComponent } from '../../components/card-vivero/card-vivero.component';
 
 @Component({
   selector: 'app-viveros',
@@ -12,26 +12,65 @@ declare const google: any;
   templateUrl: './viveros.component.html',
   styleUrls: ['./viveros.component.scss']
 })
-export class ViverosComponent implements OnInit, AfterViewInit {
+export class ViverosComponent implements OnInit {
   viveros: any[] = [];
   errorMessage: string = '';
 
-  constructor(private viveroService: NurseryService) {}
+  constructor(private dialog: MatDialog, private nurseryService: NurseryService) {}
 
   ngOnInit(): void {
-    this.loadViveros(1); // Usa un ID de usuario de prueba
+    this.loadViveros();
   }
 
-  ngAfterViewInit(): void {
-    this.initMap();
+  openCreateNurseryDialog(): void {
+    const userId = this.getUserIdFromToken();
+    if (!userId) {
+      this.errorMessage = 'Error de autenticación. Por favor, inicia sesión nuevamente.';
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DialogCreatePlantComponent, {
+      width: '400px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const formData = new FormData();
+        formData.append('name', result.name);
+        formData.append('description', result.description);
+        formData.append('ubication', result.ubication);
+        if (result.file) {
+          formData.append('file', result.file);
+        }
+
+        this.nurseryService.createNursery(userId, formData).subscribe(
+          (response) => {
+            console.log('Vivero creado exitosamente:', response);
+            this.loadViveros(); // Recargar viveros
+          },
+          (error) => {
+            console.error('Error al crear vivero:', error);
+            this.errorMessage = 'No se pudo crear el vivero. Intenta más tarde.';
+          }
+        );
+      }
+    });
   }
 
-  loadViveros(userId: number): void {
-    this.viveroService.getNurseries(userId).subscribe(
+  loadViveros(): void {
+    const userId = this.getUserIdFromToken();
+    if (!userId) {
+      console.error('No se pudo obtener el ID del usuario.');
+      this.errorMessage = 'Error de autenticación. Por favor, inicia sesión nuevamente.';
+      return;
+    }
+
+    this.nurseryService.getNurseries(userId).subscribe(
       (data) => {
         if (data && data.length > 0) {
           this.viveros = data;
-          this.errorMessage = ''; // Limpiar el mensaje de error si hay datos
+          this.errorMessage = '';
         } else {
           this.viveros = [];
           this.errorMessage = 'No hay viveros disponibles en este momento.';
@@ -45,56 +84,18 @@ export class ViverosComponent implements OnInit, AfterViewInit {
     );
   }
 
-  initMap(): void {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const userCoords = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
+  private getUserIdFromToken(): number | null {
+    const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
+    if (!token) {
+      return null;
+    }
 
-        const mapElement = document.getElementById('map');
-        if (!mapElement) {
-          console.error('El elemento con ID "map" no fue encontrado.');
-          return;
-        }
-
-        const map = new google.maps.Map(mapElement as HTMLElement, {
-          zoom: 12,
-          center: userCoords,
-        });
-
-        new google.maps.Marker({
-          position: userCoords,
-          map,
-          title: 'Tu ubicación',
-        });
-
-        this.viveros.forEach((vivero) => {
-          if (vivero.lat && vivero.lng) {
-            new google.maps.Marker({
-              position: { lat: vivero.lat, lng: vivero.lng },
-              map,
-              title: vivero.name,
-            });
-          } else {
-            console.warn(`El vivero "${vivero.name}" no tiene coordenadas.`);
-          }
-        });
-      },
-      () => {
-        console.error('Acceso a la geolocalización denegado. Centrando el mapa en ubicación predeterminada.');
-        this.errorMessage = 'No se pudo obtener tu ubicación.';
-        const defaultCoords = { lat: 19.432608, lng: -99.133209 }; // Ciudad de México
-        const mapElement = document.getElementById('map');
-        if (!mapElement) return;
-
-        new google.maps.Map(mapElement as HTMLElement, {
-          zoom: 12,
-          center: defaultCoords,
-        });
-      }
-    );
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del token JWT
+      return payload.id; // Cambia esto según cómo esté estructurado el token
+    } catch (error) {
+      console.error('Error al decodificar el token:', error);
+      return null;
+    }
   }
-
 }

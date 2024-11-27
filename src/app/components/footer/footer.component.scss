@@ -1,41 +1,54 @@
+/* Footer Styles */
 footer {
   background-color: #165100;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 300px;
+  justify-content: space-around;
+  padding: 20px;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap;
 }
 
-h2 {
+footer .section1, footer .section2, footer .section3 {
+  text-align: center;
+  margin: 10px 0;
+}
+
+footer .section1 h2 {
   color: white;
-  font-size: 20px;
+  font-size: 30px;
 }
 
-li {
+footer .section2 h2{
   color: white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 30px;
 }
 
-.section1 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 3px solid white;
+footer ul {
+  padding: 0;
+  margin: 0;
 }
 
-.section2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+footer li {
+  color: white;
+  margin: 5px 0;
 }
 
-.section3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-li:hover {
+footer li:hover {
   border-bottom: 2px solid white;
   cursor: pointer;
+}
+
+/* Footer Responsivity */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  footer ul {
+    text-align: center;
+  }
 }

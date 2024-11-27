@@ -7,13 +7,13 @@
 
 .title h2 {
   color: #457A31;
-  font-size: 8vh;
+  font-size: 2rem;
 }
 
 .card {
   background-color: #F2EBC9;
   width: 90%;
-  margin: 70px auto; /* Centramos el card */
+  margin: 20px auto; /* Centramos el card */
   border-radius: 10px;
   padding: 20px;
 }
@@ -21,76 +21,40 @@
 .cabeza {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 100px;
+  justify-content: space-between; /* Cambiado a space-between para mejor distribución */
   border-bottom: 3px solid #280404;
   padding-bottom: 20px;
 }
 
-.cabeza h2 {
-  font-size: 20px;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-
-.botones {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+.logo, .usuario {
+  width: 60px; /* Tamaño relativo al contenedor */
+  height: auto;
 }
 
 .nuevo {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column; /* Coloca los elementos en columna */
+  align-items: center; /* Centra los elementos */
 }
 
-.nuevo input {
-  border-radius: 10px;
-  width: 300px;
-  height: 30px;
-  padding: 5px;
-  border: 1px solid #ddd;
-}
-
-.nuevo textarea {
-  border-radius: 10px;
-  width: 300px;
-  height: 60px;
+.input, .textarea, .file-input, .submit-button {
+  width: 100%; /* Ajusta el tamaño al 100% */
+  margin-bottom: 10px;
   padding: 10px;
-  resize: none;
-  border: 1px solid #ddd;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.nuevo button {
+.textarea {
+  resize: none; /* Evita el cambio de tamaño del textarea */
+  height: 60px; /* Altura fija para el textarea */
+}
+
+.submit-button {
   background-color: #457A31;
   color: white;
   border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.nuevo button:hover {
-  background-color: #355921;
-}
-
-.principal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.eliminar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 600px;
-  margin: 10px 0;
 }
 
 .publicacion {
@@ -99,7 +63,23 @@
   border-radius: 10px;
   padding: 20px;
   background-color: #ffffff;
-  width: 90%;
+  width: 90%; /* Ajusta el ancho al 90% */
+}
+
+.eliminar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espacio entre los elementos */
+}
+
+.principal {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre icono y nombre */
+}
+
+.delete-icon {
+  cursor: pointer;
 }
 
 .contenido {
@@ -107,6 +87,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 }
 
 .contenido h3 {
@@ -115,14 +96,38 @@
   color: #333;
 }
 
-.contenido img {
+.media-image, .media-video {
   border-radius: 10px;
-  max-width: 100%;
+  max-width: 100%; /* Asegura que las imágenes y videos no excedan el contenedor */
   margin: 10px 0;
 }
 
-.contenido video {
-  border-radius: 10px;
-  max-width: 100%;
-  margin: 10px 0;
+.like-icon {
+  width: 30px; /* Tamaño del icono de "me gusta" */
+  height: auto;
+  cursor: pointer;
+}
+
+/* Media Queries para hacer el diseño responsivo */
+@media (max-width: 768px) {
+  .title h2 {
+    font-size: 1.5rem; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+  }
+
+  .card {
+    width: 95%; /* Aumenta el ancho del card en pantallas pequeñas */
+  }
+
+  .cabeza {
+    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+    align-items: flex-start; /* Alinea a la izquierda */
+  }
+
+  .nuevo {
+    width: 100%; /* Asegura que el formulario ocupe el 100% */
+  }
+
+  .input, .textarea, .file-input, .submit-button {
+    width: 100%; /* Mantiene el ancho al 100% */
+  }
 }

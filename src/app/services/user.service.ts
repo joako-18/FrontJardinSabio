@@ -10,33 +10,14 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Obtener un usuario por ID.
-   * @param id - ID del usuario.
-   * @returns Observable con la información del usuario.
-   */
   getUserById(id: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/user/${id}`);
   }
 
-  /**
-   * Obtener todos los usuarios.
-   * @returns Observable con la lista de usuarios.
-   */
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/users/`);
   }
 
-  /**
-   * Registrar un nuevo usuario.
-   * @param name - Nombre del usuario.
-   * @param email - Email del usuario.
-   * @param password - Contraseña del usuario.
-   * @param ubication - Ubicación del usuario (opcional).
-   * @param role - Rol del usuario.
-   * @param file - Imagen del usuario (opcional).
-   * @returns Observable con la respuesta del servidor.
-   */
   signUp(
     name: string,
     email: string,
@@ -64,31 +45,14 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/signUp`, formData);
   }
 
-  /**
-   * Iniciar sesión.
-   * @param email - Email del usuario.
-   * @param password - Contraseña del usuario.
-   * @returns Observable con el token de acceso y datos del usuario.
-   */
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
-  /**
-   * Eliminar un usuario por ID.
-   * @param id - ID del usuario a eliminar.
-   * @returns Observable con el mensaje de confirmación.
-   */
   deleteUser(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/user/${id}`);
   }
 
-  /**
-   * Actualizar un usuario.
-   * @param id - ID del usuario a actualizar.
-   * @param data - Datos a actualizar (FormData).
-   * @returns Observable con el mensaje de confirmación.
-   */
   updateUser(
     id: number,
     name: string | null,
