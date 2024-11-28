@@ -3,32 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'https://glv39q1x-8000.use2.devtunnels.ms';
+  private baseUrl = 'http://localhost:8000'; // Cambiar por la URL de tu API
 
   constructor(private http: HttpClient) {}
 
-  // Obtener todos los productos
   getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/products`);
+    return this.http.get<any[]>(`${this.baseUrl}/products/`);
   }
 
-  // Crear un producto
-  createProduct(userId: number, data: FormData): Observable<any> {
-    return this.http.post(`${this.apiUrl}/products/${userId}`, data);
+  getProduct(userId: number, productId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${userId}/products/${productId}`);
   }
 
-  // Eliminar un producto
-  deleteProduct(userId: number, productId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/products/${userId}/${productId}`);
+  createProduct( userId: number, formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/${userId}/products/`, formData);
   }
 
-  // Obtener imagen de un producto
-  getProductImage(imageId: string): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}/products/image/${imageId}`, {
-      responseType: 'blob',
-    });
+  deleteProduct(userId: number, productId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${userId}/products/${productId}`);
   }
 }

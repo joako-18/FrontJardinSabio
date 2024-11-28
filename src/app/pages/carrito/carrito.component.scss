@@ -1,68 +1,142 @@
+/* Estilos generales */
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin: 20px;
+  gap: 2rem;
+  margin: 2rem;
+  flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
 }
 
 .title h2 {
   color: #457A31;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 8vh;
+  font-size: 6vh; /* Escalabilidad */
+  text-align: center;
 }
 
 .card {
   background-color: #F2EBC9;
   border-radius: 10px;
   width: 90%;
-  margin: 70px;
+  max-width: 1200px; /* Ancho máximo */
+  margin: 2rem auto;
+  padding: 1rem;
 }
 
 .encabezado {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 500px;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: center;
+  flex-wrap: wrap; /* Ajuste en pantallas pequeñas */
 }
 
 .encabezado h2 {
   color: #457A31;
-  font-size: 40px;
+  font-size: 1.5rem;
+}
+
+.producto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ajusta el contenido en pantallas pequeñas */
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.producto-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.producto-cantidad,
+.producto-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .botones {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap; /* Ajuste para pantallas pequeñas */
 }
 
-.btn-tarjeta {
-  background-color: #457A31;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.botones div {
+  padding: 1rem;
 }
 
-.btn-ubicacion {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #457A31;
-  border-radius: 5px;
-}
-
+.btn-tarjeta,
+.btn-ubicacion,
 .btn-compra {
   background-color: #457A31;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .btn-compra h2 {
   color: white;
-  font-size: 20px;
+  font-size: 1rem;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .title {
+    gap: 1rem;
+  }
+
+  .title h2 {
+    font-size: 5vh;
+  }
+
+  .encabezado {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .encabezado h2 {
+    font-size: 1.2rem;
+  }
+
+  .producto {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .producto-info h3 {
+    font-size: 1rem;
+  }
+
+  .botones {
+    gap: 0.5rem;
+  }
+}
+
+/* Media queries para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .title h2 {
+    font-size: 4vh;
+  }
+
+  .producto-info h3,
+  .producto-info h4 {
+    font-size: 0.9rem;
+  }
+
+  .btn-compra h2 {
+    font-size: 0.9rem;
+  }
 }

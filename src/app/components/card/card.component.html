@@ -1,8 +1,8 @@
 <div class="card">
-  <img src="maceta.jpg" alt="imagen-maceta" width="100" height="100">
-  <h2>MACETA</h2>
-  <H2>$0.00</H2>
-  <div class="button">
+  <img [src]="product.img" [alt]="product.name">
+  <h2>{{ product.name }}</h2>
+  <h2>${{ product.price }}</h2>
+  <div class="button" (click)="onAddToCart()">
     <img src="agregar.png" alt="icono-mas">
   </div>
 </div>

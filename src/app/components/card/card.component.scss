@@ -1,7 +1,4 @@
-h2 {
-  color: #280404;
-}
-
+/* Estilo general */
 .card {
   display: flex;
   flex-direction: column;
@@ -10,17 +7,74 @@ h2 {
   background-color: #d7d7d7;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
-  width: 300px;
-  height: 400px;
+  width: 90%; /* Adaptable al contenedor */
+  max-width: 300px; /* Límite de tamaño */
+  height: auto; /* Ajusta altura según contenido */
+  padding: 1rem;
+  margin: 1rem auto;
 }
 
-
 .card img {
+  width: 80%; /* Imagen adaptable */
+  max-width: 150px; /* Máximo tamaño */
+  height: auto;
   border-radius: 10px;
+}
+
+h2 {
+  color: #280404;
+  text-align: center;
+  font-size: 1.2em; /* Tamaño relativo */
+  margin: 0.5rem 0;
 }
 
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1rem;
+}
+
+.button img {
+  width: 2rem; /* Tamaño relativo */
+  height: 2rem;
+  cursor: pointer;
+}
+
+/* Estilos responsivos */
+@media (min-width: 768px) {
+  .card {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 500px; /* Más ancho para tablets */
+    height: auto;
+  }
+
+  .card img {
+    width: 30%; /* Imagen más pequeña en relación al card */
+  }
+
+  h2 {
+    font-size: 1.5em; /* Aumenta el tamaño del texto */
+  }
+
+  .button {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    max-width: 600px; /* Más ancho en pantallas grandes */
+    height: 400px; /* Tamaño fijo */
+  }
+
+  .card img {
+    width: 40%;
+    max-width: 200px; /* Limita tamaño en pantallas grandes */
+  }
+
+  h2 {
+    font-size: 1.8em; /* Más grande para escritorio */
+  }
 }

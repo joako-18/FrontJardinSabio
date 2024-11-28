@@ -8,20 +8,33 @@
   <div class="encabezado">
     <h2>PRODUCTO</h2>
     <h2>CANTIDAD</h2>
+    <h2>ACCIONES</h2>
   </div>
 
-  <app-card-carrito></app-card-carrito>
-  <app-card-carrito></app-card-carrito>
-  <app-card-carrito></app-card-carrito>
+  <div *ngFor="let cartItem of cartProducts" class="producto">
+    <div class="producto-info">
+      <img [src]="cartItem.product.img" alt="{{ cartItem.product.name }}" width="50" height="50" />
+      <h3>{{ cartItem.product.name }}</h3>
+      <h4>${{ cartItem.product.price }}</h4>
+    </div>
+    <div class="producto-cantidad">
+      <button (click)="updateQuantity(cartItem, cartItem.quantity - 1)" [disabled]="cartItem.quantity <= 1">-</button>
+      <span>{{ cartItem.quantity }}</span>
+      <button (click)="updateQuantity(cartItem, cartItem.quantity + 1)">+</button>
+    </div>
+    <div class="producto-acciones">
+      <button (click)="removeFromCart(cartItem.product.id_product)">Eliminar</button>
+    </div>
+  </div>
 
   <div class="botones">
     <div class="btn-tarjeta">
-      <img src="tarjeta.png" alt="icono-tarjeta">
+      <img src="tarjeta.png" alt="icono-tarjeta" />
     </div>
     <div class="btn-ubicacion">
-      <img src="posicion.png" alt="icono-ubicacion">
+      <img src="posicion.png" alt="icono-ubicacion" />
     </div>
-    <div class="btn-compra">
+    <div class="btn-compra" (click)="checkout()">
       <h2>COMPRAR</h2>
     </div>
   </div>

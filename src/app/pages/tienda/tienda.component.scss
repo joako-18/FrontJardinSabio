@@ -1,31 +1,29 @@
+/* Estilos generales */
 h2 {
   color: #457A31;
-  font-size: 80px;
+  font-size: 6vw; /* Usamos vw para hacer el tamaño dinámico */
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-.filter {
-  background-color: #457A31;
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  margin: 0;
 }
 
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 20px;
   margin: 20px;
+  flex-wrap: wrap; /* Permite que los elementos se acomoden en varias filas */
+}
+
+.title mat-form-field {
+  min-width: 200px;
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 30px;
   margin: 30px;
 }
 
@@ -33,4 +31,60 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap; /* Hace que los elementos se ajusten cuando hay poco espacio */
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 1024px) {
+  h2 {
+    font-size: 7vw; /* Reducir tamaño del título en pantallas más pequeñas */
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas en tablets */
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 8vw; /* Reducir aún más el tamaño en móviles */
+  }
+
+  .cards {
+    grid-template-columns: 1fr; /* Una columna en móviles */
+    gap: 15px;
+  }
+
+  .title {
+    flex-direction: column; /* Apilar los elementos en pantallas pequeñas */
+    gap: 15px;
+  }
+
+  .title mat-form-field {
+    min-width: 150px;
+  }
+
+  .center {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 10vw; /* Título aún más pequeño en pantallas muy pequeñas */
+  }
+
+  .title {
+    gap: 10px; /* Reducir espacio entre los elementos del título */
+  }
+
+  .cards {
+    gap: 10px; /* Menor espacio entre las tarjetas */
+  }
+
+  .center {
+    margin-top: 10px; /* Ajustar márgenes en pantallas muy pequeñas */
+  }
 }
