@@ -1,16 +1,12 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
+import { TokenService } from '../../services/token.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-create-nursery-dialog',
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatDialogModule],
+  selector: 'app-create-nursery-dialog',
+  imports: [ReactiveFormsModule],
   templateUrl: './create-nursery-dialog.component.html',
   styleUrls: ['./create-nursery-dialog.component.scss'],
 })
@@ -19,8 +15,7 @@ export class CreateNurseryDialogComponent {
 
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<CreateNurseryDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private tokenService: TokenService
   ) {
     this.nurseryForm = this.fb.group({
       name: ['', Validators.required],
@@ -30,16 +25,39 @@ export class CreateNurseryDialogComponent {
     });
   }
 
-  // Envía los datos del formulario al componente que abrió el diálogo
+  // Obtiene el ID del usuario desde el token
+  private getUserId(): number | null {
+    return this.tokenService.getUserIdFromToken();
+  }
+
+  // Envía los datos del formulario junto con el ID del usuario
   submitForm(): void {
     if (this.nurseryForm.valid) {
-      this.dialogRef.close(this.nurseryForm.value);
+      const userId = this.getUserId();
+      if (!userId) {
+        console.error('No se pudo obtener el ID del usuario.');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('userId', String(userId));
+      formData.append('name', this.nurseryForm.value.name);
+      formData.append('description', this.nurseryForm.value.description);
+      formData.append('ubication', this.nurseryForm.value.ubication);
+      if (this.nurseryForm.value.file) {
+        formData.append('file', this.nurseryForm.value.file);
+      }
+
+      // Aquí envías los datos al backend
+      console.log('Datos a enviar:', formData);
+      // Implementa la lógica para enviar al servicio correspondiente
     }
   }
 
-  // Cancela la operación y cierra el diálogo sin datos
+  // Cancela la operación y cierra el diálogo
   cancel(): void {
-    this.dialogRef.close(null);
+    // Lógica para cerrar el diálogo
+    console.log('Operación cancelada');
   }
 
   // Actualiza el control del archivo cuando se selecciona un archivo

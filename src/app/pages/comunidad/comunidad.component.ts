@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { PublicationService } from '../../services/publication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { TokenService } from '../../services/token.service'; // Importa el TokenService
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-comunidad',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
+  selector: 'app-comunidad',
   templateUrl: './comunidad.component.html',
   styleUrls: ['./comunidad.component.scss'],
 })
@@ -17,7 +18,8 @@ export class ComunidadComponent implements OnInit {
 
   constructor(
     private publicationService: PublicationService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private tokenService: TokenService // Inyección del servicio TokenService
   ) {
     // Inicializar formulario de publicación
     this.publicationForm = this.fb.group({
@@ -46,7 +48,9 @@ export class ComunidadComponent implements OnInit {
 
   // Crear una nueva publicación
   onCreatePublication(): void {
-    const userId = this.getUserIdFromToken();
+    const userId = this.tokenService.getUserIdFromToken(); // Usar el servicio TokenService
+    console.log('User ID desde el token:', userId); // Verificar el valor
+
     if (!userId) {
       alert('Error de autenticación. Por favor, inicia sesión nuevamente.');
       return;
@@ -77,7 +81,7 @@ export class ComunidadComponent implements OnInit {
 
   // Eliminar publicación
   onDeletePublication(id_publication: number): void {
-    const userId = this.getUserIdFromToken();
+    const userId = this.tokenService.getUserIdFromToken(); // Usar el servicio TokenService
     if (!userId) {
       alert('Error de autenticación. Por favor, inicia sesión nuevamente.');
       return;
@@ -102,22 +106,6 @@ export class ComunidadComponent implements OnInit {
     const file = event.target.files[0];
     if (file) {
       this.publicationForm.patchValue({ file });
-    }
-  }
-
-  // Obtener ID del usuario desde el token
-  private getUserIdFromToken(): number | null {
-    const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
-    if (!token) {
-      return null;
-    }
-
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del token JWT
-      return payload.id; // Cambia esto según cómo esté estructurado el token
-    } catch (error) {
-      console.error('Error al decodificar el token:', error);
-      return null;
     }
   }
 }

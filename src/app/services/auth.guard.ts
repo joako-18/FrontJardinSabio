@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     } else if (role === 'gestor_vivero') {
       this.router.navigate(['/viveros']); // Redirige a la vista de viveros
       return false;
-    } else if (role === 'admin') {
+    } else if (role === 'administrador') {
       this.router.navigate(['/admin']); // Solo permite acceso a la vista de admin
       return false;
     }

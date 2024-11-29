@@ -1,37 +1,90 @@
 <div class="title">
-  <h2>COMUNIDAD</h2>
+  <h2>Publicaciones</h2>
 </div>
 
-<!-- Card para crear una nueva publicación -->
 <div class="card">
-  <div class="cabeza">
-    <div class="nuevo">
-      <img src="usuario.png" alt="icono-usuario" class="usuario">
-      <!-- Formulario para crear publicación -->
-      <form [formGroup]="publicationForm">
-        <textarea formControlName="content" placeholder="Escribe el contenido aquí" class="textarea"></textarea>
-        <input type="file" (change)="onFileSelected($event)" accept="image/*,video/*" class="file-input">
-        <button type="submit" class="submit-button">Publicar</button>
-      </form>
+  <!-- Formulario para crear una publicación -->
+  <div class="nuevo">
+    <form [formGroup]="publicationForm" (ngSubmit)="onCreatePublication()">
+      <div>
+        <input
+          class="input"
+          id="title"
+          formControlName="title"
+          type="text"
+          placeholder="Título"
+        />
+        <div
+          *ngIf="publicationForm.controls['title'].invalid && publicationForm.controls['title'].touched"
+        >
+          <small class="error">Este campo es obligatorio.</small>
+        </div>
+      </div>
+
+      <div>
+        <textarea
+          class="textarea"
+          id="content"
+          formControlName="content"
+          placeholder="Contenido"
+        ></textarea>
+        <div
+          *ngIf="publicationForm.controls['content'].invalid && publicationForm.controls['content'].touched"
+        >
+          <small class="error">Este campo es obligatorio.</small>
+        </div>
+      </div>
+
+      <div>
+        <input
+          class="file-input"
+          id="file"
+          type="file"
+          (change)="onFileSelected($event)"
+        />
+        <div
+          *ngIf="publicationForm.controls['file'].invalid && publicationForm.controls['file'].touched"
+        >
+          <small class="error">El archivo es obligatorio.</small>
+        </div>
+      </div>
+
+      <button class="submit-button" type="submit" [disabled]="publicationForm.invalid">
+        Crear publicación
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Listado de publicaciones -->
+<div *ngIf="publications.length > 0; else noPublications">
+  <div *ngFor="let publication of publications" class="publicacion">
+    <div class="cabeza">
+      <div class="principal">
+        <img class="logo" src="assets/logo.png" alt="Logo" />
+        <span class="usuario">{{ publication.user?.username }}</span>
+      </div>
+      <div class="eliminar">
+        <span>{{ publication.date }}</span>
+        <button (click)="onDeletePublication(publication.id)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+
+    <div class="contenido">
+      <h3>{{ publication.title }}</h3>
+      <p>{{ publication.content }}</p>
+      <div *ngIf="publication.file">
+        <img *ngIf="publication.fileType === 'image'" class="media-image" [src]="publication.file" />
+        <video *ngIf="publication.fileType === 'video'" class="media-video" controls>
+          <source [src]="publication.file" />
+        </video>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Lista de publicaciones -->
-<div *ngFor="let pub of publications" class="publicacion">
-  <div class="eliminar">
-    <div class="principal">
-      <img src="usuario.png" alt="icono-usuario" class="usuario">
-      <h3>{{ pub.name }}</h3>
-    </div>
-    <img src="eliminar.png" alt="icono-eliminar" (click)="onDeletePublication(pub.id_author)" class="delete-icon">
-  </div>
-  <div class="contenido">
-    <h3>{{ pub.description }}</h3>
-    <img *ngIf="pub.media" [src]="'data:image/jpeg;base64,' + pub.media" alt="imagen-publicacion" class="media-image">
-    <video *ngIf="pub.media && pub.mediaType === 'video'" controls class="media-video">
-      <source [src]="'data:video/mp4;base64,' + pub.media" type="video/mp4">
-    </video>
-    <img src="me-gusta.png" alt="icono-me-gusta" class="like-icon">
-  </div>
-</div>
+<ng-template #noPublications>
+  <p>No hay publicaciones disponibles.</p>
+</ng-template>

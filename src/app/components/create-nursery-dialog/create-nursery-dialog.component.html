@@ -1,27 +1,24 @@
-<h2>Crear nuevo Vivero</h2>
-<mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="name" placeholder="Nombre del vivero" />
-  </mat-form-field>
+<h2>Crear Nuevo Vivero</h2>
+<form [formGroup]="nurseryForm">
+  <!-- Nombre -->
+  <label for="name">Nombre:</label>
+  <input type="text" id="name" formControlName="name" placeholder="Nombre del vivero" required />
 
-  <mat-form-field>
-    <mat-label>Descripción</mat-label>
-    <textarea matInput formControlName="description" placeholder="Descripción"></textarea>
-  </mat-form-field>
+  <!-- Descripción -->
+  <label for="description">Descripción:</label>
+  <textarea id="description" formControlName="description" placeholder="Descripción" required></textarea>
 
-  <mat-form-field>
-    <mat-label>Ubicación</mat-label>
-    <input matInput formControlName="ubication" placeholder="Ubicación" />
-  </mat-form-field>
+  <!-- Ubicación -->
+  <label for="ubication">Ubicación:</label>
+  <input type="text" id="ubication" formControlName="ubication" placeholder="Ubicación" required />
 
-  <mat-form-field>
-    <mat-label>Imagen</mat-label>
-    <input type="file" (change)="onFileChange($event)" />
-  </mat-form-field>
-</mat-dialog-content>
+  <!-- Imagen -->
+  <label for="file">Imagen:</label>
+  <input type="file" id="file" (change)="onFileChange($event)" accept="image/*" />
+</form>
 
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button (click)="submitForm()">Guardar</button>
-</mat-dialog-actions>
+<!-- Acciones -->
+<div class="actions">
+  <button type="button" class="cancel" (click)="cancel()">Cancelar</button>
+  <button type="button" class="submit" (click)="submitForm()">Guardar</button>
+</div>

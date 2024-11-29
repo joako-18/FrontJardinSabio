@@ -36,13 +36,22 @@ export class UserService {
 
     // Campos opcionales
     if (ubication) {
-      formData.append('ubication', ubication); // Se asume que ya está formateado como JSON válido
+      formData.append('ubication', JSON.stringify({ location: ubication }));
+    } else {
+      formData.append('ubication', ""); // O null si prefieres
     }
+
+    // Adjuntar el archivo si existe
     if (file) {
       formData.append('file', file);
     }
 
-    return this.http.post(`${this.apiUrl}/signUp`, formData);
+    // Log the formData for debugging
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/signUp`, formData);
   }
 
   login(email: string, password: string): Observable<any> {

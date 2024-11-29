@@ -7,21 +7,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PlantService } from '../../services/plant.service';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-dialog-create-plant',
   standalone: true,
+  templateUrl: './dialog-create-plant.component.html',
+  styleUrls: ['./dialog-create-plant.component.scss'],
   imports: [
-    CommonModule,
     FormsModule,
+    CommonModule,
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule,
-  ],
-  templateUrl: './dialog-create-plant.component.html',
-  styleUrls: ['./dialog-create-plant.component.scss']
+    MatButtonModule
+  ]
 })
 export class DialogCreatePlantComponent {
   plantData: any = {
@@ -32,10 +33,15 @@ export class DialogCreatePlantComponent {
     tipo: '',
     img: null
   };
+
   categories = ['Interior', 'Exterior', 'Ornamental'];
   types = ['Cactus', 'Suculenta', 'Arbusto', 'Otro'];
 
-  constructor(public dialogRef: MatDialogRef<DialogCreatePlantComponent>, private plantService: PlantService) {}
+  constructor(
+    public dialogRef: MatDialogRef<DialogCreatePlantComponent>,
+    private plantService: PlantService,
+    private tokenService: TokenService // Inyecta el TokenService
+  ) {}
 
   onFileSelected(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -45,7 +51,7 @@ export class DialogCreatePlantComponent {
   }
 
   createPlant(): void {
-    const userId = this.getUserIdFromToken(); // Obtén el ID del usuario desde el token
+    const userId = this.tokenService.getUserIdFromToken(); // Obtén el ID del usuario desde el TokenService
 
     if (!userId) {
       console.error('No se pudo obtener el ID del usuario desde el token.');
@@ -65,30 +71,11 @@ export class DialogCreatePlantComponent {
     this.plantService.createPlant(userId, formData).subscribe(
       (response) => {
         console.log('Planta creada exitosamente:', response);
-        this.dialogRef.close(); // Cerrar el diálogo
+        this.dialogRef.close(true); // Cierra el diálogo y envía un resultado positivo
       },
       (error) => {
         console.error('Error al crear la planta:', error);
       }
     );
   }
-
-
-  private getUserIdFromToken(): number | null {
-    const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
-    if (!token) {
-      console.error('No se pudo obtener el token.');
-      return null;
-    }
-
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del token JWT
-      return payload.id; // Asegúrate de que el campo 'id' es el que corresponde en tu token
-    } catch (error) {
-      console.error('Error al decodificar el token:', error);
-      return null;
-    }
-  }
-
 }
-

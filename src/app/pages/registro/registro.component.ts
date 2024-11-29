@@ -21,14 +21,32 @@ export class RegistroComponent {
     private userService: UserService,
     private fb: FormBuilder
   ) {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      userType: ['', Validators.required],
-      ubication: [''], // Opcional
-    });
+    this.registerForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+        userType: ['', Validators.required],
+        ubication: [''],
+      },
+      {
+        validator: this.passwordMatchValidator, // Añadimos validador personalizado
+      }
+    );
+  }
+
+  /**
+   * Método que valida si las contraseñas coinciden
+   */
+  passwordMatchValidator(formGroup: FormGroup): null | object {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+
+    if (password && confirmPassword && password !== confirmPassword) {
+      return { passwordMismatch: true };
+    }
+    return null;
   }
 
   /**
@@ -47,13 +65,11 @@ export class RegistroComponent {
       const name = values.name;
       const email = values.email;
       const password = values.password;
-      const ubication = values.ubication
-        ? JSON.stringify({ location: values.ubication })
-        : null;
+      const ubication = values.ubication ? JSON.stringify({ location: values.ubication }) : null;
       const role = values.userType;
       const file = this.selectedFile;
 
-      // Llamar al servicio para registro
+      // Llamar al servicio para registrar
       this.userService.signUp(name, email, password, ubication, role, file).subscribe(
         (response) => {
           alert('Usuario registrado con éxito.');
@@ -67,6 +83,7 @@ export class RegistroComponent {
       alert('Por favor, completa el formulario correctamente.');
     }
   }
+
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {

@@ -1,40 +1,36 @@
-<h2 mat-dialog-title>Crear Nueva Planta</h2>
-<mat-dialog-content>
-  <form #plantForm="ngForm">
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="plantData.name" name="name" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Descripción</mat-label>
-      <textarea matInput [(ngModel)]="plantData.description" name="description" required></textarea>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Hora de Riego</mat-label>
-      <input matInput [(ngModel)]="plantData.hora_de_riego" name="hora_de_riego" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Categoría</mat-label>
-      <mat-select [(ngModel)]="plantData.category" name="category" required>
-        <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tipo</mat-label>
-      <mat-select [(ngModel)]="plantData.tipo" name="tipo" required>
-        <mat-option *ngFor="let type of types" [value]="type">{{ type }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+<h2>Crear Nueva Planta</h2>
+<form #plantForm="ngForm">
+  <!-- Nombre -->
+  <label for="name">Nombre:</label>
+  <input type="text" id="name" [(ngModel)]="plantData.name" name="name" required />
 
-    <!-- Elimina mat-form-field para el campo de archivo -->
-    <div class="file-input-container">
-      <mat-label>Imagen</mat-label>
-      <input type="file" (change)="onFileSelected($event)" accept="image/*">
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button [disabled]="!plantForm.valid" (click)="createPlant()">Crear</button>
-</mat-dialog-actions>
+  <!-- Descripción -->
+  <label for="description">Descripción:</label>
+  <textarea id="description" [(ngModel)]="plantData.description" name="description" required></textarea>
 
+  <!-- Hora de Riego -->
+  <label for="hora_de_riego">Hora de Riego:</label>
+  <input type="text" id="hora_de_riego" [(ngModel)]="plantData.hora_de_riego" name="hora_de_riego" required />
+
+  <!-- Categoría -->
+  <label for="category">Categoría:</label>
+  <select id="category" [(ngModel)]="plantData.category" name="category" required>
+    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+  </select>
+
+  <!-- Tipo -->
+  <label for="tipo">Tipo:</label>
+  <select id="tipo" [(ngModel)]="plantData.tipo" name="tipo" required>
+    <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+  </select>
+
+  <!-- Imagen -->
+  <label for="img">Imagen:</label>
+  <input type="file" id="img" (change)="onFileSelected($event)" accept="image/*" />
+</form>
+
+<!-- Botones -->
+<div class="actions">
+  <button type="button" class="cancel" (click)="dialogRef.close()">Cancelar</button>
+  <button type="button" class="submit" [disabled]="!plantForm.valid" (click)="createPlant()">Crear</button>
+</div>
