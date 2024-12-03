@@ -9,6 +9,7 @@ import { RegistroComponent } from "./pages/registro/registro.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { ComunidadComponent } from './pages/comunidad/comunidad.component';
+import { ConfiguracionComponent } from './pages/configuracion/configuracion.component';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,9 @@ import { ComunidadComponent } from './pages/comunidad/comunidad.component';
     LoginComponent,
     RegistroComponent,
     HomeComponent,
-    CarritoComponent
+    CarritoComponent,
+    ComunidadComponent,
+    ConfiguracionComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -32,6 +32,7 @@ export class TiendaComponent implements OnInit {
     this.productService.getProducts().subscribe((data) => {
       this.products = data;
       this.filteredProducts = data;
+      console.log(this.products);
     });
   }
 

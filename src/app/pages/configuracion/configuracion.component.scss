@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  padding: 16px;
+  background-color: #f2ebc9; /* Fondo del componente */
+  color: #457a31; /* Texto principal */
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.configuracion-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile {
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff; /* Fondo del perfil */
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid #457a31;
+  margin-bottom: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 16px;
+  color: #457a31;
+  text-align: left;
+  display: block;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  gap: 8px;
+}
+
+button {
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button[color="warn"] {
+  background-color: #f44336;
+  color: white;
+}
+
+button[color="warn"]:hover {
+  background-color: #d32f2f;
+}
+
+button[color="primary"] {
+  background-color: #457a31;
+  color: #f2ebc9;
+}
+
+button[color="primary"]:hover {
+  background-color: #366225;
+}
+
+/* Estilos de carga */
+.loading {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #457a31;
+  padding: 16px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .profile {
+    width: 100%;
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
