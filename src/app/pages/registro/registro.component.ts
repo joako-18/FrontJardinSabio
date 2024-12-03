@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss'],
 })
+
 export class RegistroComponent {
   registerForm: FormGroup;
   selectedFile: File | null = null;

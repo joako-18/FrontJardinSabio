@@ -1,10 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { NurseryService } from '../../services/nursery.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogCreatePlantComponent } from '../../components/dialog-create-plant/dialog-create-plant.component';
+import { CreateNurseryDialogComponent } from '../../components/create-nursery-dialog/create-nursery-dialog.component';
 import { CommonModule } from '@angular/common';
 import { CardViveroComponent } from '../../components/card-vivero/card-vivero.component';
+import { TokenService } from '../../services/token.service';
 
+interface Vivero {
+  id_nursery: number;
+  info: {
+    name: string;
+    description: string;
+  };
+  ubication: string;
+  img: string;
+  id_manager: number;
+}
 @Component({
   selector: 'app-viveros',
   standalone: true,
@@ -13,10 +24,10 @@ import { CardViveroComponent } from '../../components/card-vivero/card-vivero.co
   styleUrls: ['./viveros.component.scss']
 })
 export class ViverosComponent implements OnInit {
-  viveros: any[] = [];
+  viveros: Vivero[] = [];
   errorMessage: string = '';
 
-  constructor(private dialog: MatDialog, private nurseryService: NurseryService) {}
+  constructor(private dialog: MatDialog, private nurseryService: NurseryService, private tokenService: TokenService) {}
 
   ngOnInit(): void {
     this.loadViveros();
@@ -29,31 +40,14 @@ export class ViverosComponent implements OnInit {
       return;
     }
 
-    const dialogRef = this.dialog.open(DialogCreatePlantComponent, {
+    const dialogRef = this.dialog.open(CreateNurseryDialogComponent, {
       width: '400px',
       disableClose: true,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const formData = new FormData();
-        formData.append('name', result.name);
-        formData.append('description', result.description);
-        formData.append('ubication', result.ubication);
-        if (result.file) {
-          formData.append('file', result.file);
-        }
-
-        this.nurseryService.createNursery(userId, formData).subscribe(
-          (response) => {
-            console.log('Vivero creado exitosamente:', response);
-            this.loadViveros(); // Recargar viveros
-          },
-          (error) => {
-            console.error('Error al crear vivero:', error);
-            this.errorMessage = 'No se pudo crear el vivero. Intenta más tarde.';
-          }
-        );
+        this.loadViveros();
       }
     });
   }
@@ -66,33 +60,35 @@ export class ViverosComponent implements OnInit {
       return;
     }
 
-    this.nurseryService.getNurseries(userId).subscribe(
-      (data) => {
+    this.nurseryService.getNurseries(userId).subscribe({
+      next: (data) => {
+        console.log('Datos recibidos del servidor:', data);
         if (data && data.length > 0) {
           this.viveros = data;
+          console.log('Viveros procesados:', this.viveros);
           this.errorMessage = '';
         } else {
           this.viveros = [];
           this.errorMessage = 'No hay viveros disponibles en este momento.';
         }
       },
-      (error) => {
+      error: (error) => {
         console.error('Error al cargar viveros:', error);
         this.viveros = [];
-        this.errorMessage = 'No se pudo cargar la información de los viveros. Intenta más tarde.';
+        this.errorMessage = 'No se pudo cargar la información de los viveros.';
       }
-    );
+    });
   }
 
   private getUserIdFromToken(): number | null {
-    const token = localStorage.getItem('token'); // Obtén el token del almacenamiento local
+    const token = this.tokenService.getToken(); // Obtén el token del almacenamiento local
     if (!token) {
       return null;
     }
-
     try {
       const payload = JSON.parse(atob(token.split('.')[1])); // Decodifica el payload del token JWT
-      return payload.id; // Cambia esto según cómo esté estructurado el token
+      console.log("payload_id:", payload.id);
+      return payload.sub; // Cambia esto según cómo esté estructurado el token
     } catch (error) {
       console.error('Error al decodificar el token:', error);
       return null;

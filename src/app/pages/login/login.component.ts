@@ -44,10 +44,11 @@ export class LoginComponent {
 
       this.userService.login(email, password).subscribe({
         next: (response: any) => {
-          const { token, role } = response;
-
+          const { access_token, role } = response;
+          console.log(access_token);
+          
           // Almacena token y rol en localStorage
-          localStorage.setItem('token', token);
+          localStorage.setItem('token', access_token);
           localStorage.setItem('role', role);
 
           // Redirige a una ruta predeterminada, el guard hará el resto

@@ -5,6 +5,15 @@ import { TokenService } from '../../services/token.service'; // Importa el Token
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+interface Publication {
+  info: {
+    name: string;
+    description: string;
+  };
+  media: string;
+  id_publication: number;
+}
+
 @Component({
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
@@ -13,7 +22,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./comunidad.component.scss'],
 })
 export class ComunidadComponent implements OnInit {
-  publications: any[] = [];
+  publications: Publication[] = [];
   publicationForm: FormGroup;
 
   constructor(
@@ -36,7 +45,8 @@ export class ComunidadComponent implements OnInit {
   // Cargar publicaciones desde la API
   loadPublications(): void {
     this.publicationService.getPublications().subscribe({
-      next: (data) => {
+      next: (data: Publication[]) => {
+        console.log('Publicaciones recibidas:', data);
         this.publications = data;
       },
       error: (err) => {

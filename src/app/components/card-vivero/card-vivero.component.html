@@ -1,13 +1,15 @@
 <div class="card">
   <div class="imagen">
-    <img [src]="vivero.image || 'fakeVivero.jpg'" alt="vivero">
+    <img style="max-width: 300px; max-height: 300px;" [src]="vivero.img || 'assets/images/fakeVivero.jpg'" alt="vivero">
   </div>
   <div class="contenido">
-    <h3>{{ vivero.name || 'Nombre del vivero' }}</h3>
+    <h3>{{ vivero.info.name || 'Nombre del vivero' }}</h3>
     <div class="link">
-      <img src="marcador.png" alt="marcador-icon">
-      <a [href]="vivero.location || '#'">{{ vivero.location || 'Dirección no disponible' }}</a>
+      <img  src="marcador.png" alt="marcador-icon">
+      <a [href]="'https://maps.google.com/?q=' + vivero.ubication" target="_blank">
+        {{ vivero.ubication || 'Dirección no disponible' }}
+      </a>
     </div>
-    <p>{{ vivero.description || 'Descripción no disponible' }}</p>
+    <p>{{ vivero.info.description || 'Descripción no disponible' }}</p>
   </div>
 </div>
