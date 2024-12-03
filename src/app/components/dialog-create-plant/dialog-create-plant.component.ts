@@ -50,32 +50,47 @@ export class DialogCreatePlantComponent {
     }
   }
 
-  createPlant(): void {
-    const userId = this.tokenService.getUserIdFromToken(); // Obtén el ID del usuario desde el TokenService
+  createPlant() {
+    const userId = this.tokenService.getUserIdFromToken();
 
     if (!userId) {
-      console.error('No se pudo obtener el ID del usuario desde el token.');
-      return;
+        console.error('No se pudo obtener el ID del usuario desde el token.');
+        return;
     }
 
-    const formData = new FormData();
-    formData.append('name', this.plantData.name);
-    formData.append('description', this.plantData.description);
-    formData.append('hora_de_riego', this.plantData.hora_de_riego);
-    formData.append('category', this.plantData.category);
-    formData.append('tipo', this.plantData.tipo);
-    if (this.plantData.img) {
-      formData.append('img', this.plantData.img);
+    if (!this.plantData.name || !this.plantData.description || 
+        !this.plantData.hora_de_riego || !this.plantData.category || 
+        !this.plantData.tipo) {
+        console.error('Todos los campos son requeridos');
+        return;
     }
 
-    this.plantService.createPlant(userId, formData).subscribe(
-      (response) => {
-        console.log('Planta creada exitosamente:', response);
-        this.dialogRef.close(true); // Cierra el diálogo y envía un resultado positivo
-      },
-      (error) => {
-        console.error('Error al crear la planta:', error);
-      }
-    );
+    const name = this.plantData.name.trim();
+    const description = this.plantData.description.trim();
+    const hora_de_riego = this.plantData.hora_de_riego.trim();
+    const category = this.plantData.category;
+    const tipo = this.plantData.tipo;
+    const img = this.plantData.img;
+    
+    console.log('Datos a enviar:', {
+        name,
+        description,
+        hora_de_riego,
+        category,
+        tipo,
+        img
+    });
+  
+    this.plantService.createPlant(userId, name, description, hora_de_riego, category, tipo, img)
+        .subscribe({
+            next: (response) => {
+                console.log('Planta creada exitosamente:', response);
+                this.dialogRef.close(true);
+            },
+            error: (error) => {
+                console.error('Error detallado al crear la planta:', error);
+                // Aquí puedes mostrar un mensaje de error al usuario
+            }
+        });
   }
 }

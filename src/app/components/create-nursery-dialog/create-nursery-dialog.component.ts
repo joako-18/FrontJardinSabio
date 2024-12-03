@@ -1,70 +1,69 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { NurseryService } from '../../services/nursery.service';
 import { TokenService } from '../../services/token.service';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   standalone: true,
   selector: 'app-create-nursery-dialog',
-  imports: [ReactiveFormsModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
   templateUrl: './create-nursery-dialog.component.html',
   styleUrls: ['./create-nursery-dialog.component.scss'],
 })
 export class CreateNurseryDialogComponent {
-  nurseryForm: FormGroup;
+  nurseryData: any = {
+    name: '',
+    description: '',
+    ubication: '',
+    img: null
+  };
 
   constructor(
-    private fb: FormBuilder,
+    public dialogRef: MatDialogRef<CreateNurseryDialogComponent>,
+    private nurseryService: NurseryService,
     private tokenService: TokenService
-  ) {
-    this.nurseryForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      ubication: ['', Validators.required],
-      file: [null], // Imagen opcional
-    });
-  }
+  ) {}
 
-  // Obtiene el ID del usuario desde el token
-  private getUserId(): number | null {
-    return this.tokenService.getUserIdFromToken();
-  }
-
-  // Envía los datos del formulario junto con el ID del usuario
-  submitForm(): void {
-    if (this.nurseryForm.valid) {
-      const userId = this.getUserId();
-      if (!userId) {
-        console.error('No se pudo obtener el ID del usuario.');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('userId', String(userId));
-      formData.append('name', this.nurseryForm.value.name);
-      formData.append('description', this.nurseryForm.value.description);
-      formData.append('ubication', this.nurseryForm.value.ubication);
-      if (this.nurseryForm.value.file) {
-        formData.append('file', this.nurseryForm.value.file);
-      }
-
-      // Aquí envías los datos al backend
-      console.log('Datos a enviar:', formData);
-      // Implementa la lógica para enviar al servicio correspondiente
+  onFileSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.nurseryData.img = file;
     }
   }
 
-  // Cancela la operación y cierra el diálogo
-  cancel(): void {
-    // Lógica para cerrar el diálogo
-    console.log('Operación cancelada');
-  }
-
-  // Actualiza el control del archivo cuando se selecciona un archivo
-  onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.length) {
-      this.nurseryForm.patchValue({ file: input.files[0] });
+  createNursery(): void {
+    const userId = this.tokenService.getUserIdFromToken();
+    if (!userId) {
+      console.error('No se pudo obtener el ID del usuario.');
+      return;
     }
+
+    const name = this.nurseryData.name;
+    const description = this.nurseryData.description;
+    const ubication = this.nurseryData.ubication;
+    const img = this.nurseryData.img;    
+
+    this.nurseryService.createNursery(userId, name, description, ubication, img)
+    .subscribe({
+      next: (response) => {
+        console.log('Vivero creado exitosamente:', response);
+        this.dialogRef.close(true);
+      },
+      error: (error) => {
+        console.error('Error al crear el vivero:', error);
+      }
+      });
   }
 }

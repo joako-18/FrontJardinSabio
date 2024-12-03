@@ -16,8 +16,8 @@
         <ul>
           <li
             *ngFor="let plant of plants"
-            (click)="selectPlant(plant.id)"
-            [class.selected]="plant.id === selectedPlant?.id"> <!-- Resalta la planta seleccionada -->
+            (click)="selectPlant(plant.id_plant)"
+            [class.selected]="plant.id_plant === selectedPlant?.id_plant">
             {{ plant.name }}
           </li>
         </ul>

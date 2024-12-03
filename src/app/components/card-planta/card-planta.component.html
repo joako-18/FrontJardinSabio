@@ -1,8 +1,14 @@
 <div class="card" *ngIf="plant; else noPlant">
   <div class="valor">
     <h2>{{ plant.name }}</h2>
-    <img [src]="plant.imageUrl || 'default.jpg'" alt="{{ plant.name }}">
+    <img 
+      style="max-width: 35%; max-height: 35%;" 
+      [src]="plant.img ? plant.img : 'img/plant_default.jpg'" 
+      [alt]="plant.name"
+    >
+    <br>
     <p>{{ plant.description }}</p>
+    <h3>{{ plant.hora_de_riego }}</h3>
     <div class="relog">
       <img src="" alt="">
       <p>{{ plant.lastWateredTime }}</p>
@@ -11,6 +17,6 @@
 </div>
 
 <ng-template #noPlant>
-  <p>Selecciona una planta para ver los detalles.</p>
+  <h6>Selecciona una planta para ver los detalles.</h6>
 </ng-template>
 

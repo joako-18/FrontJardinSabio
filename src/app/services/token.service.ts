@@ -4,6 +4,7 @@ import { jwtDecode } from 'jwt-decode'; // Importa jwtDecode correctamente
 @Injectable({
   providedIn: 'root',
 })
+
 export class TokenService {
 
   // Obtener el token desde localStorage
@@ -25,7 +26,7 @@ export class TokenService {
         this.clearToken(); // Limpia el token si ha expirado
         return null;
       }
-      return decoded?.userId || null; // Devuelve el userId si existe en el token
+      return decoded?.sub ? parseInt(decoded.sub) : null;
     } catch (err) {
       console.error('Error al decodificar el token:', err);
       return null;

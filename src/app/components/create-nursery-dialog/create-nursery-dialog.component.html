@@ -1,24 +1,19 @@
 <h2>Crear Nuevo Vivero</h2>
-<form [formGroup]="nurseryForm">
-  <!-- Nombre -->
+<form #nurseryForm="ngForm">
   <label for="name">Nombre:</label>
-  <input type="text" id="name" formControlName="name" placeholder="Nombre del vivero" required />
+  <input type="text" id="name" [(ngModel)]="nurseryData.name" name="name" required />
 
-  <!-- Descripción -->
   <label for="description">Descripción:</label>
-  <textarea id="description" formControlName="description" placeholder="Descripción" required></textarea>
+  <textarea id="description" [(ngModel)]="nurseryData.description" name="description" required></textarea>
 
-  <!-- Ubicación -->
   <label for="ubication">Ubicación:</label>
-  <input type="text" id="ubication" formControlName="ubication" placeholder="Ubicación" required />
+  <input type="text" id="ubication" [(ngModel)]="nurseryData.ubication" name="ubication" required />
 
-  <!-- Imagen -->
-  <label for="file">Imagen:</label>
-  <input type="file" id="file" (change)="onFileChange($event)" accept="image/*" />
+  <label for="img">Imagen:</label>
+  <input type="file" id="img" (change)="onFileSelected($event)" accept="image/*" />
 </form>
 
-<!-- Acciones -->
 <div class="actions">
-  <button type="button" class="cancel" (click)="cancel()">Cancelar</button>
-  <button type="button" class="submit" (click)="submitForm()">Guardar</button>
+  <button type="button" class="cancel" (click)="dialogRef.close(false)">Cancelar</button>
+  <button type="button" class="submit" (click)="createNursery()">Crear</button>
 </div>

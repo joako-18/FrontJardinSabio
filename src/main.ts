@@ -3,6 +3,7 @@ import { AppComponent } from './app/app.component';
 import { appConfig } from './app/app.config';
 import { provideHttpClient, withFetch, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TimeoutInterceptor } from './app/interceptor/timeout.interceptor'; // Asegúrate de importar tu interceptor
+import { AuthInterceptor } from './app/interceptors/auth.interceptor'; // Asegúrate de importar tu interceptor
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -14,8 +15,13 @@ bootstrapApplication(AppComponent, {
     // Registra el interceptor usando HTTP_INTERCEPTORS
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TimeoutInterceptor,  // El interceptor que quieres usar
-      multi: true  // Permite agregar múltiples interceptores si es necesario
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TimeoutInterceptor,
+      multi: true
     }
   ]
 })

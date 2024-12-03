@@ -6,6 +6,16 @@ import { DialogCreatePlantComponent } from '../../components/dialog-create-plant
 import { PlantService } from '../../services/plant.service';
 import { TokenService } from '../../services/token.service'; // Servicio para obtener el token
 
+interface Plant {
+  id_plant: number;
+  name: string;
+  description: string;
+  hora_de_riego: string;
+  category: string;
+  tipo: string;
+  img?: any;
+}
+
 @Component({
   selector: 'app-jardin',
   standalone: true,
@@ -14,9 +24,9 @@ import { TokenService } from '../../services/token.service'; // Servicio para ob
   styleUrls: ['./jardin.component.scss'],
 })
 export class JardinComponent implements OnInit {
-  plants: any[] = []; // Plantas del usuario
+  plants: Plant[] = []; // Tipado correcto
   userId: number | null = null; // ID del usuario desde el token
-  selectedPlant: any | null = null; // Planta seleccionada
+  selectedPlant: Plant | null = null; // Planta seleccionada
 
   constructor(
     private plantService: PlantService,
@@ -34,24 +44,26 @@ export class JardinComponent implements OnInit {
   }
 
   // Carga las plantas del usuario
-  loadUserPlants(): void {
-    if (this.userId) {
-      this.plantService.getPlantsByUser(this.userId).subscribe(
-        (data) => {
-          this.plants = data;
-        },
-        (error) => {
-          console.error('Error al cargar las plantas:', error);
-        }
-      );
+    loadUserPlants(): void {
+      if (this.userId) {
+        this.plantService.getPlantsByUser(this.userId).subscribe(
+          (data) => {
+            this.plants = data;
+          },
+          (error) => {
+            console.error('Error al cargar las plantas:', error);
+          }
+        );
+      }
     }
-  }
 
   // Selecciona una planta específica
   selectPlant(plantId: number): void {
+    console.log("Seleccionando planta con ID:", plantId);
     if (this.userId) {
       this.plantService.getPlantById(this.userId, plantId).subscribe(
         (data) => {
+          console.log("Datos de planta recibidos:", data);
           this.selectedPlant = data;
         },
         (error) => {
@@ -63,31 +75,14 @@ export class JardinComponent implements OnInit {
 
   // Abre el diálogo para crear una nueva planta
   openCreatePlantDialog(): void {
+    console.log("Ventana abierta")
     const dialogRef = this.dialog.open(DialogCreatePlantComponent, {
       width: '400px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result && this.userId) {
-        const formData = new FormData();
-        formData.append('name', result.name);
-        formData.append('description', result.description);
-        formData.append('hora_de_riego', result.hora_de_riego);
-        formData.append('category', result.category);
-        formData.append('tipo', result.tipo);
-        if (result.img) {
-          formData.append('img', result.img);
-        }
-
-        this.plantService.createPlant(this.userId, formData).subscribe(
-          () => {
-            this.loadUserPlants(); // Recargar plantas tras crear una nueva
-          },
-          (error) => {
-            console.error('Error al crear la planta:', error);
-          }
-        );
-      }
+      console.log("result :", result)
+      this.loadUserPlants();
     });
   }
 }

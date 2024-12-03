@@ -60,26 +60,18 @@
 <div *ngIf="publications.length > 0; else noPublications">
   <div *ngFor="let publication of publications" class="publicacion">
     <div class="cabeza">
-      <div class="principal">
-        <img class="logo" src="assets/logo.png" alt="Logo" />
-        <span class="usuario">{{ publication.user?.username }}</span>
-      </div>
       <div class="eliminar">
-        <span>{{ publication.date }}</span>
-        <button (click)="onDeletePublication(publication.id)">
+        <button (click)="onDeletePublication(publication.id_publication)">
           Eliminar
         </button>
       </div>
     </div>
 
     <div class="contenido">
-      <h3>{{ publication.title }}</h3>
-      <p>{{ publication.content }}</p>
-      <div *ngIf="publication.file">
-        <img *ngIf="publication.fileType === 'image'" class="media-image" [src]="publication.file" />
-        <video *ngIf="publication.fileType === 'video'" class="media-video" controls>
-          <source [src]="publication.file" />
-        </video>
+      <h2>{{ publication.info.name }}</h2>
+      <p>{{ publication.info.description }}</p>
+      <div style="display: flex; justify-content: center;" *ngIf="publication.media">
+        <img style="max-width: 35%; max-height: 35%;" class="media-image" [src]="publication.media" alt="Imagen de la publicación">
       </div>
     </div>
   </div>
