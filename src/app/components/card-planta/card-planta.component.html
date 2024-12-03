@@ -1,14 +1,14 @@
 <div class="card" *ngIf="plant; else noPlant">
   <div class="valor">
     <h2>{{ plant.name }}</h2>
-    <img 
-      style="max-width: 35%; max-height: 35%;" 
-      [src]="plant.img ? plant.img : 'img/plant_default.jpg'" 
+    <img
+      style="max-width: 35%; max-height: 35%;"
+      [src]="plant.img ? plant.img : 'img/plant_default.jpg'"
       [alt]="plant.name"
     >
     <br>
     <p>{{ plant.description }}</p>
-    <h3>{{ plant.hora_de_riego }}</h3>
+    <h3>{{ plant.hora_de_riego | timeFormat }} </h3>
     <div class="relog">
       <img src="" alt="">
       <p>{{ plant.lastWateredTime }}</p>

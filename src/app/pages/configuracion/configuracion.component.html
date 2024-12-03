@@ -3,22 +3,30 @@
 
   <div class="profile" *ngIf="user; else noData">
     <form>
-      <img [src]="user.profilePicture || 'https://via.placeholder.com/100'" alt="User Image" />
-      <label for="name">Nombre: {{ user.name }}</label>
-      <label for="email">Correo: {{ user.email }}</label>
-      <label for="role">Rol: {{ user.role }}</label>
+      <img
+        [src]="user.profilePicture || 'https://via.placeholder.com/100'"
+        alt="User Image"
+      />
+      <p>Nombre: {{ user.name || 'Sin nombre' }}</p>
+      <p>Correo: {{ user.email || 'Correo no disponible' }}</p>
+      <p>Rol: {{ user.role || 'Rol no especificado' }}</p>
     </form>
     <div class="actions">
-      <button mat-raised-button color="warn">Cerrar sesión</button>
+      <button mat-raised-button color="warn" (click)="logout()">Cerrar sesión</button>
       <button mat-raised-button color="primary" (click)="openEditDialog()">Editar perfil</button>
     </div>
   </div>
 </div>
 
 <ng-template #loading>
-  <div class="loading">Cargando datos del usuario...</div>
+  <div class="loading">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    Cargando datos del usuario...
+  </div>
 </ng-template>
 
 <ng-template #noData>
-  <div class="no-data">No se encontraron datos del usuario.</div>
+  <div class="no-data">
+    No se encontraron datos del usuario. Por favor, intenta recargar la página o verifica tu conexión.
+  </div>
 </ng-template>

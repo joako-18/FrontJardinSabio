@@ -1,17 +1,11 @@
 <div class="title">
   <h2>VIVEROS CERCA DE TI ...</h2>
-  <input type="search" placeholder="Buscador ..." />
-  <button (click)="openCreateNurseryDialog()">Crear Vivero</button>
+  <button *ngIf="isGestorDeVivero" (click)="openCreateNurseryDialog()">Crear Vivero</button>
 </div>
 
 <!-- Mensaje de error -->
 <div *ngIf="errorMessage" class="error-message">
   <p>{{ errorMessage }}</p>
-</div>
-
-<!-- Contenedor del mapa -->
-<div class="mapa">
-  <div id="map" style="width: 100%; height: 400px;"></div>
 </div>
 
 <!-- Lista de viveros -->

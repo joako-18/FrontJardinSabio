@@ -26,11 +26,14 @@ interface Vivero {
 export class ViverosComponent implements OnInit {
   viveros: Vivero[] = [];
   errorMessage: string = '';
+  isGestorDeVivero: boolean = false;
 
   constructor(private dialog: MatDialog, private nurseryService: NurseryService, private tokenService: TokenService) {}
 
   ngOnInit(): void {
     this.loadViveros();
+    const role = this.tokenService.getUserRoleFromToken();
+    this.isGestorDeVivero = role === 'gestor_de_vivero';
   }
 
   openCreateNurseryDialog(): void {

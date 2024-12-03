@@ -39,4 +39,8 @@ export class HeaderComponent {
   onLogin() {
     this.router.navigate(['login']);
   }
+
+  onConfiguracion() {
+    this.router.navigate(['configuracion']);
+  }
 }

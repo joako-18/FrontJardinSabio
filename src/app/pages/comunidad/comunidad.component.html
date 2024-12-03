@@ -6,7 +6,7 @@
   <!-- Formulario para crear una publicación -->
   <div class="nuevo">
     <form [formGroup]="publicationForm" (ngSubmit)="onCreatePublication()">
-      <div>
+      <div class="publication">
         <input
           class="input"
           id="title"
@@ -57,13 +57,10 @@
 </div>
 
 <!-- Listado de publicaciones -->
-<div *ngIf="publications.length > 0; else noPublications">
+<div *ngIf="publications.length > 0; else noPublications" class="back">
   <div *ngFor="let publication of publications" class="publicacion">
     <div class="cabeza">
       <div class="eliminar">
-        <button (click)="onDeletePublication(publication.id_publication)">
-          Eliminar
-        </button>
       </div>
     </div>
 

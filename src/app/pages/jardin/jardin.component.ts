@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { CardPlantaComponent } from '../../components/card-planta/card-planta.component';
 import { DialogCreatePlantComponent } from '../../components/dialog-create-plant/dialog-create-plant.component';
 import { PlantService } from '../../services/plant.service';
-import { TokenService } from '../../services/token.service'; // Servicio para obtener el token
+import { TokenService } from '../../services/token.service';
+import { TimeFormatPipe } from '../../pipes/time-format.pipe';
 
 interface Plant {
   id_plant: number;

@@ -76,6 +76,11 @@ header .link {
   gap: 10px;
 }
 
+p {
+  color: #165100;
+  font-weight: bold;
+}
+
 /* Header Responsivity */
 @media (max-width: 768px) {
   header {

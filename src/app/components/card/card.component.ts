@@ -8,11 +8,11 @@ import { Product } from '../../models/product.model'; // Crear un modelo para ti
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  @Input() product!: Product; // Producto recibido como entrada
-  @Output() addToCart = new EventEmitter<Product>(); // Emitir evento al agregar al carrito
+  @Input() product!: Product; // Producto a mostrar
+  @Output() addToCart = new EventEmitter<Product>(); // Evento para agregar al carrito
 
   onAddToCart(): void {
-    this.addToCart.emit(this.product);
+    this.addToCart.emit(this.product); // Emitir el evento con el producto actual
   }
 }
 

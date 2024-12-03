@@ -16,7 +16,6 @@ export class LoginComponent {
   errorMessage: string = '';
 
   constructor(private userService: UserService, private router: Router) {
-    // Configuración del formulario con validaciones
     this.loginForm = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -29,7 +28,6 @@ export class LoginComponent {
     });
   }
 
-  // Getters para acceder a los controles desde el template
   get email() {
     return this.loginForm.get('email');
   }
@@ -46,12 +44,10 @@ export class LoginComponent {
         next: (response: any) => {
           const { access_token, role } = response;
           console.log(access_token);
-          
-          // Almacena token y rol en localStorage
+
           localStorage.setItem('token', access_token);
           localStorage.setItem('role', role);
 
-          // Redirige a una ruta predeterminada, el guard hará el resto
           this.router.navigate(['/home']);
         },
         error: () => {
@@ -61,7 +57,6 @@ export class LoginComponent {
     }
   }
 
-  // Navegación al registro
   onRegistro(): void {
     this.router.navigate(['/registro']);
   }

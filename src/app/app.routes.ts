@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { JardinComponent } from './pages/jardin/jardin.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { AuthGuard } from './services/auth.guard';
+import { ConfiguracionComponent } from './pages/configuracion/configuracion.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'tienda', component: TiendaComponent, canActivate: [AuthGuard] },
   { path: 'jardin', component: JardinComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/home' },
 ];
 

@@ -1,12 +1,8 @@
-/* Estilos globales para el proyecto Angular */
-
-/* Aplica el fondo animado al body */
 html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
-  /* Fondo animado */
   --y-0: 50%;
   --c-0: hsla(49.756097560975604, 61%, 86%, 1);
   --x-0: 15%;
@@ -22,7 +18,6 @@ html, body {
   background-blend-mode: multiply;
 }
 
-/* Keyframes para la animación del gradiente */
 @keyframes hero-gradient-animation {
   0% {
       --y-0: 50%;
@@ -57,7 +52,6 @@ html, body {
   }
 }
 
-/* Registro de propiedades CSS personalizadas */
 @property --y-0 {
   syntax: '<percentage>';
   inherits: false;
