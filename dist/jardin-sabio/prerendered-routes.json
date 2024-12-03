@@ -1,0 +1,14 @@
+{
+  "routes": [
+    "/admin",
+    "/carrito",
+    "/comunidad",
+    "/configuracion",
+    "/home",
+    "/jardin",
+    "/login",
+    "/registro",
+    "/tienda",
+    "/viveros"
+  ]
+}
